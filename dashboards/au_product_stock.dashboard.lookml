@@ -1,7 +1,8 @@
 - dashboard: product_stock_health__au
   title: Product Stock Health - AU
   layout: newspaper
-  refresh: 1 day
+  preferred_viewer: dashboards
+  refresh: '86400000'
   elements:
   - title: Tier 1 - Top 10
     name: Tier 1 - Top 10
@@ -58,7 +59,7 @@
     rows_font_size: 12
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
-    refresh: 1 day
+    refresh: '86400000'
     listen: {}
     row: 0
     col: 6
@@ -119,7 +120,7 @@
     rows_font_size: 12
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
-    refresh: 1 day
+    refresh: '86400000'
     listen: {}
     row: 0
     col: 12
@@ -180,7 +181,7 @@
     rows_font_size: 12
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
-    refresh: 1 day
+    refresh: '86400000'
     listen: {}
     row: 6
     col: 6
@@ -241,7 +242,7 @@
     rows_font_size: 12
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
-    refresh: 1 day
+    refresh: '86400000'
     listen: {}
     row: 6
     col: 12
@@ -253,10 +254,10 @@
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,
-      woh.woh, woh.active_week_count]
+      woh.avg_weekly_sales, woh.woh, woh.active_week_count]
     filters:
       woh.rank_group_l12w: 0 to 10
-    sorts: [woh.avg_weekly_units_sold desc]
+    sorts: [woh.avg_weekly_sales desc]
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -287,6 +288,8 @@
       woh.woh:
         is_active: true
         value_display: true
+      woh.avg_weekly_sales:
+        is_active: true
     series_value_format:
       woh.woh:
         name: decimal_0
@@ -296,6 +299,10 @@
         name: decimal_0
         format_string: "#,##0"
         label: Decimals (0)
+      woh.avg_weekly_sales:
+        name: decimal_2
+        format_string: "#,##0.00"
+        label: Decimals (2)
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_y_axis_labels: true
@@ -324,7 +331,7 @@
     series_types: {}
     show_null_points: true
     defaults_version: 1
-    refresh: 1 hour
+    refresh: '3600000'
     listen: {}
     row: 12
     col: 0
@@ -353,10 +360,10 @@
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,
-      woh.woh, woh.active_week_count]
+      woh.avg_weekly_sales, woh.woh, woh.active_week_count]
     filters:
       woh.rank_group_l12w: 11 to 30
-    sorts: [woh.avg_weekly_units_sold desc]
+    sorts: [woh.avg_weekly_sales desc]
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -387,6 +394,8 @@
       woh.woh:
         is_active: true
         value_display: true
+      woh.avg_weekly_sales:
+        is_active: true
     series_value_format:
       woh.woh:
         name: decimal_0
@@ -396,6 +405,10 @@
         name: decimal_0
         format_string: "#,##0"
         label: Decimals (0)
+      woh.avg_weekly_sales:
+        name: decimal_2
+        format_string: "#,##0.00"
+        label: Decimals (2)
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_y_axis_labels: true
@@ -424,7 +437,7 @@
     series_types: {}
     show_null_points: true
     defaults_version: 1
-    refresh: 1 hour
+    refresh: '3600000'
     listen: {}
     row: 18
     col: 0
@@ -436,10 +449,10 @@
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,
-      woh.woh, woh.active_week_count]
+      woh.avg_weekly_sales, woh.woh, woh.active_week_count]
     filters:
       woh.rank_group_l12w: 31 to 100
-    sorts: [woh.avg_weekly_units_sold desc]
+    sorts: [woh.avg_weekly_sales desc]
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -470,6 +483,8 @@
       woh.woh:
         is_active: true
         value_display: true
+      woh.avg_weekly_sales:
+        is_active: true
     series_value_format:
       woh.woh:
         name: decimal_0
@@ -479,6 +494,10 @@
         name: decimal_0
         format_string: "#,##0"
         label: Decimals (0)
+      woh.avg_weekly_sales:
+        name: decimal_2
+        format_string: "#,##0.00"
+        label: Decimals (2)
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_y_axis_labels: true
@@ -507,7 +526,7 @@
     series_types: {}
     show_null_points: true
     defaults_version: 1
-    refresh: 1 hour
+    refresh: '3600000'
     listen: {}
     row: 28
     col: 0
@@ -519,10 +538,10 @@
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,
-      woh.woh, woh.active_week_count]
+      woh.avg_weekly_sales, woh.woh, woh.active_week_count]
     filters:
       woh.rank_group_l12w: 101 or Above
-    sorts: [woh.avg_weekly_units_sold desc]
+    sorts: [woh.avg_weekly_sales desc]
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -553,6 +572,8 @@
       woh.woh:
         is_active: true
         value_display: true
+      woh.avg_weekly_sales:
+        is_active: true
     series_value_format:
       woh.woh:
         name: decimal_0
@@ -562,6 +583,10 @@
         name: decimal_0
         format_string: "#,##0"
         label: Decimals (0)
+      woh.avg_weekly_sales:
+        name: decimal_2
+        format_string: "#,##0.00"
+        label: Decimals (2)
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_y_axis_labels: true
@@ -590,7 +615,7 @@
     series_types: {}
     show_null_points: true
     defaults_version: 1
-    refresh: 1 hour
+    refresh: '3600000'
     listen: {}
     row: 38
     col: 0
