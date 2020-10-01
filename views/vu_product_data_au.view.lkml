@@ -1,5 +1,5 @@
-view: vu_product_data_us {
-  sql_table_name: `aerobic-datum-283623.google_sheets.vu_product_data_us`
+view: vu_product_data_au {
+  sql_table_name: `aerobic-datum-283623.google_sheets.vu_product_data_au`
     ;;
 
   dimension_group: _fivetran_synced {

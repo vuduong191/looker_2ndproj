@@ -51,11 +51,11 @@ explore: order_line {
     relationship: many_to_one
     sql_on: ${order_line.product_id}=${product.id} ;;
   }
-  join: vu_product_data_us {
+  join: vu_product_data_au {
     type: left_outer
     view_label: "Manual Data"
     relationship: many_to_one
-    sql_on: ${order_line.sku}=${vu_product_data_us.product_variant_sku} ;;
+    sql_on: ${order_line.sku}=${vu_product_data_au.product_variant_sku} ;;
   }
   join: inventory_week_active {
     relationship: many_to_one
@@ -103,11 +103,11 @@ explore: inventory_level {
 }
 
 explore: product_variant {
-  join: vu_product_data_us {
+  join: vu_product_data_au {
     type: left_outer
     view_label: "Manual Data"
     relationship: many_to_one
-    sql_on: ${product_variant.sku}=${vu_product_data_us.product_variant_sku} ;;
+    sql_on: ${product_variant.sku}=${vu_product_data_au.product_variant_sku} ;;
   }
   join: avg_weekly_sales_2 {
     type: left_outer

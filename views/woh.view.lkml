@@ -3,11 +3,11 @@ view: woh {
       explore_source: product_variant {
         column: sku {}
         column: inventory_quantity {}
-        column: category { field: vu_product_data_us.category }
-        column: color { field: vu_product_data_us.color }
-        column: material { field: vu_product_data_us.material }
-        column: product { field: vu_product_data_us.product }
-        column: size { field: vu_product_data_us.size }
+        column: category { field: vu_product_data_au.category }
+        column: color { field: vu_product_data_au.color }
+        column: material { field: vu_product_data_au.material }
+        column: product { field: vu_product_data_au.product }
+        column: size { field: vu_product_data_au.size }
         column: rank_group_l12w { field: avg_weekly_sales_2.rank_group_l12w }
         column: avg_weekly_units_sold { field: avg_weekly_sales_2.avg_weekly_units_sold }
         column: active_week_count { field: avg_weekly_sales_2.active_week_count }
@@ -19,7 +19,7 @@ view: woh {
           value: "-NULL"
         }
         filters: {
-          field: vu_product_data_us.category
+          field: vu_product_data_au.category
           value: "-NULL"
         }
       }

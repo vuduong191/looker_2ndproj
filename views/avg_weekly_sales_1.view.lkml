@@ -6,11 +6,11 @@ view: avg_weekly_sales_1 {
         column: is_cancelled {field: order.is_cancelled}
         column: sum {}
         column: total_price {}
-        column: category { field: vu_product_data_us.category }
-        column: color { field: vu_product_data_us.color }
-        column: material { field: vu_product_data_us.material }
-        column: product { field: vu_product_data_us.product }
-        column: size { field: vu_product_data_us.size }
+        column: category { field: vu_product_data_au.category }
+        column: color { field: vu_product_data_au.color }
+        column: material { field: vu_product_data_au.material }
+        column: product { field: vu_product_data_au.product }
+        column: size { field: vu_product_data_au.size }
         filters: [
           inventory_week_active.is_inactive : "No",
           order_is_marketing.is_marketing: "No",
