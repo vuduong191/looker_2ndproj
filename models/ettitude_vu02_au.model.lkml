@@ -2,6 +2,7 @@ connection: "klaviyo"
 
 # include all the views
 include: "/views/**/*.view"
+include: "/**/*.dashboard"
 
 datagroup: test_vu_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -58,8 +59,11 @@ explore: order_line {
   }
   join: inventory_week_active {
     relationship: many_to_one
-    sql_on: ${order.created_week} = ${inventory_week_active.snapshot_week}
-    AND ${order_line.sku} = ${inventory_week_active.sku};;
+    # sql_on: ${order.created_week} = ${inventory_week_active.snapshot_week}
+    # AND ${order_line.sku} = ${inventory_week_active.sku};;
+    # temp before inventory snapshot isready
+    sql_on: ${order.created_week} = ${inventory_week_active.day_week}
+    AND ${order_line.sku} = ${inventory_week_active.product_variant_sku};;
   }
   join: customer {
     relationship: many_to_one
@@ -85,7 +89,7 @@ explore: order_line {
     sql_on: ${first_order_product_types.customer_id} = ${order.customer_id} ;;
   }
 }
-explore: person {}
+
 explore: inventory_level {
   hidden: yes
   join: product_variant {
@@ -128,7 +132,7 @@ explore: inventory_snapshot {
     sql_on: ${product_variant.product_id} = ${product.id} ;;
   }
 }
-explore: avg_spent_by_state {}
+
 explore: avg_weekly_sales_2 {}
 explore: avg_weekly_sales_1 {
   join: avg_weekly_sales_2 {
@@ -143,3 +147,6 @@ explore: order_shipping_line {}
 explore: order_tag {}
 explore: order_is_b2b {}
 explore: woh {}
+
+# temporary before inventory snapshot ready
+explore: daily_inventory_au {}
