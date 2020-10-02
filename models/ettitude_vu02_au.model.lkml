@@ -4,18 +4,10 @@ connection: "klaviyo"
 include: "/views/**/*.view"
 include: "/dashboards/*.dashboard"
 
-datagroup: test_vu_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
-}
 datagroup: daily_datagroup {
   sql_trigger:   SELECT cast(CURRENT_DATE as string); ;;
   max_cache_age: "24 hours"
 }
-
-persist_with: test_vu_default_datagroup
-
-
 
 explore: order {}
 explore: order_line {
@@ -117,7 +109,7 @@ explore: product_variant {
   }
 }
 explore: inventory_insert {
-  hidden: yes
+  # hidden: yes
 }
 explore: inventory_snapshot_au {
   join: product_variant {

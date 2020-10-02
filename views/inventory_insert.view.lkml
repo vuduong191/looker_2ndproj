@@ -1,64 +1,23 @@
 view: inventory_insert {
   derived_table: {
-    sql_trigger_value: SELECT FORMAT_TIMESTAMP('%F', CURRENT_TIMESTAMP(), 'America/Los_Angeles') ;;
+    sql_trigger_value: SELECT EXTRACT(MINUTE FROM TIME_ADD(CURRENT_TIME, INTERVAL 5 MINUTE)) ;;
     create_process: {
       sql_step:
         INSERT INTO looker_scratch.inventory_snapshot_au SELECT
-          product_variant.inventory_item_id  AS inventory_item_id,
-          product_variant.inventory_quantity  AS inventory_quantity,
-          product_variant.product_id  AS product_id,
-          product_variant.sku  AS sku,
-          product_variant.title  AS title,
-          CURRENT_DATE AS snapshot_date,
-        FROM `aerobic-datum-283623.shopify_au.product_variant`
-            AS product_variant
-        GROUP BY 1,2,3,4,5 ;;
+          product_variant.sku  AS product_variant_sku,
+          CURRENT_DATE AS day,
+          product_variant.inventory_quantity  AS inventory_quantity
+        FROM `aerobic-datum-283623.shopify_au.product_variant` AS product_variant;;
     }
   }
-
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
-
-  dimension: product_variant_inventory_item_id {
+  dimension: inventory_quantity {
     type: number
-    sql: ${TABLE}.product_variant_inventory_item_id ;;
+    sql: ${TABLE}.inventory_quantity ;;
   }
 
-  dimension: product_variant_inventory_quantity {
-    type: number
-    sql: ${TABLE}.product_variant_inventory_quantity ;;
-  }
-
-  dimension: product_variant_product_id {
-    type: number
-    sql: ${TABLE}.product_variant_product_id ;;
-  }
 
   dimension: product_variant_sku {
     type: string
     sql: ${TABLE}.product_variant_sku ;;
-  }
-
-  dimension: product_variant_title {
-    type: string
-    sql: ${TABLE}.product_variant_title ;;
-  }
-
-  dimension: product_variant_id {
-    type: number
-    sql: ${TABLE}.product_variant_id ;;
-  }
-
-  set: detail {
-    fields: [
-      product_variant_inventory_item_id,
-      product_variant_inventory_quantity,
-      product_variant_product_id,
-      product_variant_sku,
-      product_variant_title,
-      product_variant_id
-    ]
   }
 }
