@@ -1,24 +1,18 @@
 view: inventory_insert {
   derived_table: {
-    datagroup_trigger: daily_datagroup
+    sql_trigger_value: SELECT FORMAT_TIMESTAMP('%F', CURRENT_TIMESTAMP(), 'America/Los_Angeles') ;;
     create_process: {
       sql_step:
-        with max_date as (
-          select max(snapshot_date) as max_date from looker_scratch.inventory_snapshot
-        )
-
-      INSERT INTO looker_scratch.inventory_snapshot SELECT
-        product_variant.inventory_item_id  AS inventory_item_id,
-        product_variant.inventory_quantity  AS inventory_quantity,
-        product_variant.product_id  AS product_id,
-        product_variant.sku  AS sku,
-        product_variant.title  AS title,
-        CURRENT_DATE AS snapshot_date,
-      FROM `aerobic-datum-283623.shopify_au.product_variant`
-          AS product_variant
-      inner join max_date on 1=1
-      where CURRENT_DATE > max_date.max_date
-      GROUP BY 1,2,3,4,5 ;;
+        INSERT INTO looker_scratch.inventory_snapshot_au SELECT
+          product_variant.inventory_item_id  AS inventory_item_id,
+          product_variant.inventory_quantity  AS inventory_quantity,
+          product_variant.product_id  AS product_id,
+          product_variant.sku  AS sku,
+          product_variant.title  AS title,
+          CURRENT_DATE AS snapshot_date,
+        FROM `aerobic-datum-283623.shopify_au.product_variant`
+            AS product_variant
+        GROUP BY 1,2,3,4,5 ;;
     }
   }
 

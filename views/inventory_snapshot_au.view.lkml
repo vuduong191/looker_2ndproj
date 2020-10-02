@@ -1,5 +1,5 @@
-view: inventory_snapshot {
-  sql_table_name: `aerobic-datum-283623.looker_scratch.inventory_snapshot`
+view: inventory_snapshot_au {
+  sql_table_name: `aerobic-datum-283623.looker_scratch.inventory_snapshot_au`
     ;;
 
   dimension: pk {

@@ -10,7 +10,7 @@ datagroup: test_vu_default_datagroup {
 }
 datagroup: daily_datagroup {
   sql_trigger:   SELECT cast(CURRENT_DATE as string); ;;
-  max_cache_age: "25 hours"
+  max_cache_age: "24 hours"
 }
 
 persist_with: test_vu_default_datagroup
@@ -119,13 +119,10 @@ explore: product_variant {
 explore: inventory_insert {
   hidden: yes
 }
-explore: inventory_insert_native {
-  hidden: yes
-}
-explore: inventory_snapshot {
+explore: inventory_snapshot_au {
   join: product_variant {
     relationship: many_to_one
-    sql_on: ${inventory_snapshot.inventory_item_id} = ${product_variant.inventory_item_id} ;;
+    sql_on: ${inventory_snapshot_au.inventory_item_id} = ${product_variant.inventory_item_id} ;;
   }
   join: product {
     relationship: many_to_one
