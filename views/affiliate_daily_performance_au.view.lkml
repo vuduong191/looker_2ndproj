@@ -20,11 +20,11 @@ view: affiliate_daily_performance_au {
       sql: ${TABLE}.transaction_date ;;
     }
 
-    dimension: no_of_impressions {
+    dimension: impressions {
       type: number
       sql: ${TABLE}.of_impressions ;;
     }
-    dimension: no_of_clicks {
+    dimension: clicks {
       type: number
       sql: ${TABLE}.of_clicks ;;
     }
@@ -34,7 +34,7 @@ view: affiliate_daily_performance_au {
     }
     dimension: items {
       type: number
-      sql: ${TABLE}.of_items ;;
+      sql: ${TABLE}.items ;;
     }
     dimension: cancelled_items {
       type: number
