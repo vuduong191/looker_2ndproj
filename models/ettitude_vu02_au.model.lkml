@@ -139,3 +139,4 @@ explore: woh {}
 
 # temporary before inventory snapshot ready
 explore: daily_inventory_au {}
+explore: affiliate_daily_performance_au {}
