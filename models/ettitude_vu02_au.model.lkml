@@ -139,4 +139,10 @@ explore: woh {}
 
 # temporary before inventory snapshot ready
 explore: daily_inventory_au {}
-explore: affiliate_daily_performance_au {}
+explore: affiliate_daily_performance_au {
+  join: affiliate_performance_measures {
+    view_label: "Calculated Metrics"
+    relationship: one_to_one
+    sql:   ;;
+}
+}
