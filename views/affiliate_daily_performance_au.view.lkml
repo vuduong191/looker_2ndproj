@@ -28,17 +28,9 @@ view: affiliate_daily_performance_au {
       type: number
       sql: ${TABLE}.of_clicks ;;
     }
-    dimension: click_through_rate {
-      type: number
-      sql: ${TABLE}.click_through_rate__ctr ;;
-    }
     dimension: orders {
       type: number
       sql: ${TABLE}.of_orders ;;
-    }
-    dimension: orders_over_click {
-      type: number
-      sql: ${TABLE}.orders_click ;;
     }
     dimension: items {
       type: number
@@ -52,17 +44,9 @@ view: affiliate_daily_performance_au {
       type: number
       sql: ${TABLE}.of_net_items ;;
     }
-    dimension: net_items_per_order {
-      type: number
-      sql: ${TABLE}.net_items_per_order ;;
-    }
     dimension: sales {
       type: number
       sql: ${TABLE}.sales ;;
-    }
-    dimension: average_order_value {
-      type: number
-      sql: ${TABLE}.average_order_value ;;
     }
     dimension: total_commission {
       type: number
