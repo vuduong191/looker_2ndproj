@@ -1,5 +1,6 @@
 view: avg_weekly_sales_1 {
     derived_table: {
+      sql_trigger_value: SELECT EXTRACT(WEEK FROM TIMESTAMP_ADD(CURRENT_TIMESTAMP, INTERVAL -10 MINUTE) AT TIME ZONE "America/Los_Angeles") ;;
       explore_source: order_line {
         column: sku {}
         column: created_week { field: order.created_week }

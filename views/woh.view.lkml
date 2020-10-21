@@ -15,6 +15,12 @@ view: woh {
         derived_column: woh {
           sql:  inventory_quantity / NULLIF(avg_weekly_units_sold, 0)  ;;
         }
+        # derived_column: woh {
+        #   sql:  (CASE WHEN inventory_quantity < 0
+        #               THEN 0
+        #               ELSE inventory_quantity
+        #               END) / NULLIF(avg_weekly_units_sold, 0)  ;;
+        # }
         filters: {
           field: product_variant.sku
           value: "-NULL"
@@ -27,6 +33,7 @@ view: woh {
     }
     dimension: sku {}
     dimension: inventory_quantity {
+      label: "Current Inv"
       type: number
     }
     dimension: woh {
@@ -64,7 +71,7 @@ view: woh {
       type: number
     }
     dimension: active_week_count {
-      label: "Active Week Count"
+      label: "Active Week"
       description: "Number of week without stockout in the last 12 weeks"
       value_format: "0"
       type: number
