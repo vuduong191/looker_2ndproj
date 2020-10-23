@@ -108,9 +108,7 @@ explore: product_variant {
     sql_on: ${product_variant.sku}=${avg_weekly_sales_2.sku} ;;
   }
 }
-explore: inventory_insert {
-  # hidden: yes
-}
+
 explore: inventory_snapshot_au {
   join: product_variant {
     relationship: many_to_one
