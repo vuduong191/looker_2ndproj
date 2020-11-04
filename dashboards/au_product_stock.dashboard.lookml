@@ -254,7 +254,7 @@
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,
-      woh.avg_weekly_sales, woh.woh, woh.active_week_count]
+      woh.avg_weekly_sales, woh.woh, woh.active_week_count, woh.inventory_quantity]
     filters:
       woh.rank_group_l12w: 0 to 10
     sorts: [woh.avg_weekly_sales desc]
@@ -360,7 +360,7 @@
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,
-      woh.avg_weekly_sales, woh.woh, woh.active_week_count]
+      woh.avg_weekly_sales, woh.woh, woh.active_week_count, woh.inventory_quantity]
     filters:
       woh.rank_group_l12w: 11 to 30
     sorts: [woh.avg_weekly_sales desc]
@@ -449,7 +449,7 @@
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,
-      woh.avg_weekly_sales, woh.woh, woh.active_week_count]
+      woh.avg_weekly_sales, woh.woh, woh.active_week_count, woh.inventory_quantity]
     filters:
       woh.rank_group_l12w: 31 to 100
     sorts: [woh.avg_weekly_sales desc]
@@ -538,7 +538,7 @@
     explore: woh
     type: looker_grid
     fields: [woh.sku, woh.product, woh.color, woh.material, woh.size, woh.avg_weekly_units_sold,
-      woh.avg_weekly_sales, woh.woh, woh.active_week_count]
+      woh.avg_weekly_sales, woh.woh, woh.active_week_count, woh.inventory_quantity]
     filters:
       woh.rank_group_l12w: 101 or Above
     sorts: [woh.avg_weekly_sales desc]
@@ -621,3 +621,17 @@
     col: 0
     width: 24
     height: 12
+  - name: Market
+    type: text
+    title_text: Market
+    body_text: |-
+      <div  style="width: 100%">
+      <center>
+      <img style="margin: auto" src="https://cdn.countryflags.com/thumbs/australia/flag-400.png" width="200"/>
+      </center>
+
+      </div>
+    row: 0
+    col: 20
+    width: 4
+    height: 5
