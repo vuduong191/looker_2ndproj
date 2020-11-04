@@ -2,32 +2,7 @@ view: inventory_snapshot_au {
   sql_table_name: `aerobic-datum-283623.looker_scratch.inventory_snapshot_au`
     ;;
 
-  dimension: pk {
-    hidden: yes
-    sql: ${inventory_item_id} || ${snapshot_date} ;;
-  }
-
-  dimension: inventory_item_id {
-    type: number
-    sql: ${TABLE}.inventory_item_id ;;
-  }
-
-  dimension: inventory_quantity {
-    type: number
-    sql: ${TABLE}.inventory_quantity ;;
-  }
-
-  dimension: product_id {
-    type: number
-    sql: ${TABLE}.product_id ;;
-  }
-
-  dimension: sku {
-    type: string
-    sql: ${TABLE}.sku ;;
-  }
-
-  dimension_group: snapshot {
+  dimension_group: day {
     type: time
     timeframes: [
       raw,
@@ -39,12 +14,17 @@ view: inventory_snapshot_au {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.snapshot_date ;;
+    sql: ${TABLE}.day ;;
   }
 
-  dimension: title {
+  dimension: inventory_quantity {
+    type: number
+    sql: ${TABLE}.inventory_quantity ;;
+  }
+
+  dimension: sku {
     type: string
-    sql: ${TABLE}.title ;;
+    sql: ${TABLE}.product_variant_sku ;;
   }
 
   measure: count {

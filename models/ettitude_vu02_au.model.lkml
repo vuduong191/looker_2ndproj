@@ -55,7 +55,7 @@ explore: order_line {
     # AND ${order_line.sku} = ${inventory_week_active.sku};;
     # temp before inventory snapshot isready
     sql_on: ${order.created_week} = ${inventory_week_active.day_week}
-    AND ${order_line.sku} = ${inventory_week_active.product_variant_sku};;
+    AND ${order_line.sku} = ${inventory_week_active.sku};;
   }
   join: customer {
     relationship: many_to_one
@@ -109,16 +109,7 @@ explore: product_variant {
   }
 }
 
-explore: inventory_snapshot_au {
-  join: product_variant {
-    relationship: many_to_one
-    sql_on: ${inventory_snapshot_au.inventory_item_id} = ${product_variant.inventory_item_id} ;;
-  }
-  join: product {
-    relationship: many_to_one
-    sql_on: ${product_variant.product_id} = ${product.id} ;;
-  }
-}
+explore: inventory_snapshot_au {}
 
 explore: avg_weekly_sales_2 {}
 explore: avg_weekly_sales_1 {
@@ -136,7 +127,7 @@ explore: order_is_b2b {}
 explore: woh {}
 
 # temporary before inventory snapshot ready
-explore: daily_inventory_au {}
+
 explore: affiliate_daily_performance_au {
   join: affiliate_performance_measures {
     view_label: "Calculated Metrics"
