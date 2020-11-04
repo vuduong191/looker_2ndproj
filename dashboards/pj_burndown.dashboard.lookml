@@ -5,7 +5,7 @@
   preferred_viewer: dashboards-next
 
   elements:
-  - name: pj_burndown
+  - name: pj_burndown_2
     title: PJ Burndown
     model: ettitude_vu02_au
     explore: woh
@@ -14,7 +14,7 @@
       woh.sum_weekly_unit_sold, woh.size]
     pivots: [woh.size]
     filters:
-      woh.category: '"Men''s Wear","Women''s wear"'
+      woh.category: '"Men''s Wear","Women''s Wear"'
     sorts: [woh.size 0, woh.category, woh.product, woh.color]
     limit: 500
     dynamic_fields:
