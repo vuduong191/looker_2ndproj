@@ -178,6 +178,25 @@ view: order {
     ]
     sql: ${TABLE}.created_at ;;
   }
+  parameter: timeframe_picker {
+    label: "Date Granularity"
+    type: string
+    allowed_value: { value: "Date" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Year" }
+    default_value: "Date"
+  }
+  dimension: dynamic_timeframe {
+    type: string
+    sql:
+    CASE
+    WHEN {% parameter timeframe_picker %} = 'Date' THEN CAST(${created_date} AS STRING)
+    WHEN {% parameter timeframe_picker %} = 'Week' THEN CAST(DATE_TRUNC(${created_date}, WEEK) AS STRING)
+    WHEN{% parameter timeframe_picker %} = 'Month' THEN CAST(DATE_TRUNC(${created_date}, MONTH) AS STRING)
+    WHEN{% parameter timeframe_picker %} = 'Year' THEN CAST(DATE_TRUNC(${created_date}, YEAR) AS STRING)
+    END ;;
+  }
 
   dimension: currency {
     type: string
@@ -224,7 +243,7 @@ view: order {
     sql: ${TABLE}.name ;;
     link: {
       label: "View Shopify Order"
-      url: "https://ettitudeusa.myshopify.com/admin/orders/{{ id._value | url_encode }}?orderListBeta=true"
+      url: "https://ettitude.myshopify.com/admin/orders/{{ id._value | url_encode }}?orderListBeta=true"
     }
   }
 
@@ -363,7 +382,10 @@ view: order {
     type: string
     sql: ${TABLE}.source_name ;;
   }
-
+  dimension: online_order {
+    type: yesno
+    sql: ${TABLE}.source_name="web" OR ${TABLE}.source_name="580111";;
+  }
   dimension: subtotal_price {
     type: number
     sql: ${TABLE}.subtotal_price ;;

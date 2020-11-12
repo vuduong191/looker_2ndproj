@@ -15,7 +15,7 @@ explore: order_line {
     type: left_outer
     relationship: many_to_one
     view_label: "Order"
-    fields: [order.created_date, order.created_week, order.is_cancelled, order.source_name, sum_of_sales, id, name, count, min_order_id]
+    fields: [order.created_date, order.created_week, order.is_cancelled, order.source_name, sum_of_sales, id, name, count, min_order_id, order.dynamic_timeframe, order.timeframe_picker]
     sql_on: ${order.id}=${order_line.order_id} ;;
   }
 

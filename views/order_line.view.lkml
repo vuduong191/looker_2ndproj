@@ -11,18 +11,21 @@ view: order_line {
   }
 
   dimension: fulfillable_quantity {
+    hidden: yes
     group_label: "Fullfillment"
     type: number
     sql: ${TABLE}.fulfillable_quantity ;;
   }
 
   dimension: fulfillment_service {
+    hidden: yes
     group_label: "Fullfillment"
     type: string
     sql: ${TABLE}.fulfillment_service ;;
   }
 
   dimension: fulfillment_status {
+    hidden: yes
     group_label: "Fullfillment"
     type: string
     sql: ${TABLE}.fulfillment_status ;;
@@ -34,6 +37,7 @@ view: order_line {
   }
 
   dimension: grams {
+    hidden: yes
     type: number
     sql: ${TABLE}.grams ;;
   }
@@ -56,12 +60,14 @@ view: order_line {
   }
 
   dimension: pre_tax_price {
+    description: "Price after markdown and before tax applied"
     type: number
     value_format_name: usd
     sql: ${TABLE}.pre_tax_price ;;
   }
 
   dimension: price {
+    description: "Original price"
     type: number
     value_format_name: usd
     sql: ${TABLE}.price ;;
@@ -80,113 +86,113 @@ view: order_line {
     sql: ${TABLE}.property_bundle_id ;;
   }
 
-  dimension: property_bundle_image {
-    group_label: "Properties"
-    type: string
-    sql: ${TABLE}.property_bundle_image ;;
-  }
+  # dimension: property_bundle_image {
+  #   group_label: "Properties"
+  #   type: string
+  #   sql: ${TABLE}.property_bundle_image ;;
+  # }
 
-  dimension: property_bundle_url {
-    group_label: "Properties"
-    type: string
-    sql: ${TABLE}.property_bundle_url ;;
-  }
+  # dimension: property_bundle_url {
+  #   group_label: "Properties"
+  #   type: string
+  #   sql: ${TABLE}.property_bundle_url ;;
+  # }
 
-  dimension: property_complete_bundle {
-    group_label: "Properties"
-    type: number
-    sql: ${TABLE}.property_complete_bundle ;;
-  }
+  # dimension: property_complete_bundle {
+  #   group_label: "Properties"
+  #   type: number
+  #   sql: ${TABLE}.property_complete_bundle ;;
+  # }
 
-  dimension: property_discount {
-    group_label: "Properties"
-    type: number
-    sql: ${TABLE}.property_discount ;;
-  }
+  # dimension: property_discount {
+  #   group_label: "Properties"
+  #   type: number
+  #   sql: ${TABLE}.property_discount ;;
+  # }
 
-  dimension: property_discount_bundle {
-    group_label: "Properties"
-    type: yesno
-    sql: ${TABLE}.property_discount_bundle ;;
-  }
+  # dimension: property_discount_bundle {
+  #   group_label: "Properties"
+  #   type: yesno
+  #   sql: ${TABLE}.property_discount_bundle ;;
+  # }
 
-  dimension: property_discount_name {
-    group_label: "Properties"
-    type: string
-    sql: ${TABLE}.property_discount_name ;;
-  }
+  # dimension: property_discount_name {
+  #   group_label: "Properties"
+  #   type: string
+  #   sql: ${TABLE}.property_discount_name ;;
+  # }
 
-  dimension: property_discount_type {
-    group_label: "Properties"
-    type: string
-    sql: ${TABLE}.property_discount_type ;;
-  }
+  # dimension: property_discount_type {
+  #   group_label: "Properties"
+  #   type: string
+  #   sql: ${TABLE}.property_discount_type ;;
+  # }
 
-  dimension: property_from_wishlist {
-    group_label: "Properties"
-    type: number
-    sql: ${TABLE}.property_from_wishlist ;;
-  }
+  # dimension: property_from_wishlist {
+  #   group_label: "Properties"
+  #   type: number
+  #   sql: ${TABLE}.property_from_wishlist ;;
+  # }
 
-  dimension: property_pos_code_key_for_gift_card_creation {
-    group_label: "Properties"
-    type: string
-    sql: ${TABLE}.property_pos_code_key_for_gift_card_creation ;;
-  }
+  # dimension: property_pos_code_key_for_gift_card_creation {
+  #   group_label: "Properties"
+  #   type: string
+  #   sql: ${TABLE}.property_pos_code_key_for_gift_card_creation ;;
+  # }
 
-  dimension: property_pre_ordered_items {
-    group_label: "Properties"
-    type: number
-    sql: ${TABLE}.property_pre_ordered_items ;;
-  }
+  # dimension: property_pre_ordered_items {
+  #   group_label: "Properties"
+  #   type: number
+  #   sql: ${TABLE}.property_pre_ordered_items ;;
+  # }
 
-  dimension: property_products {
-    group_label: "Properties"
-    type: string
-    sql: ${TABLE}.property_products ;;
-  }
+  # dimension: property_products {
+  #   group_label: "Properties"
+  #   type: string
+  #   sql: ${TABLE}.property_products ;;
+  # }
 
-  dimension: property_shipping_from_august_10_th {
-    group_label: "Properties"
-    type: number
-    sql: ${TABLE}.property_shipping_from_august_10_th ;;
-  }
+  # dimension: property_shipping_from_august_10_th {
+  #   group_label: "Properties"
+  #   type: number
+  #   sql: ${TABLE}.property_shipping_from_august_10_th ;;
+  # }
 
-  dimension: property_shipping_from_july_20_th {
-    group_label: "Properties"
-    type: number
-    sql: ${TABLE}.property_shipping_from_july_20_th ;;
-  }
+  # dimension: property_shipping_from_july_20_th {
+  #   group_label: "Properties"
+  #   type: number
+  #   sql: ${TABLE}.property_shipping_from_july_20_th ;;
+  # }
 
-  dimension: property_shipping_from_july_31_st {
-    group_label: "Properties"
-    type: number
-    sql: ${TABLE}.property_shipping_from_july_31_st ;;
-  }
+  # dimension: property_shipping_from_july_31_st {
+  #   group_label: "Properties"
+  #   type: number
+  #   sql: ${TABLE}.property_shipping_from_july_31_st ;;
+  # }
 
-  dimension: property_ships_from_august_10_th {
-    group_label: "Properties"
-    type: number
-    sql: ${TABLE}.property_ships_from_august_10_th ;;
-  }
+  # dimension: property_ships_from_august_10_th {
+  #   group_label: "Properties"
+  #   type: number
+  #   sql: ${TABLE}.property_ships_from_august_10_th ;;
+  # }
 
-  dimension: property_ships_from_august_25_th {
-    group_label: "Properties"
-    type: number
-    sql: ${TABLE}.property_ships_from_august_25_th ;;
-  }
+  # dimension: property_ships_from_august_25_th {
+  #   group_label: "Properties"
+  #   type: number
+  #   sql: ${TABLE}.property_ships_from_august_25_th ;;
+  # }
 
-  dimension: property_ships_from_july_20_th {
-    group_label: "Properties"
-    type: number
-    sql: ${TABLE}.property_ships_from_july_20_th ;;
-  }
+  # dimension: property_ships_from_july_20_th {
+  #   group_label: "Properties"
+  #   type: number
+  #   sql: ${TABLE}.property_ships_from_july_20_th ;;
+  # }
 
-  dimension: property_ships_from_july_31_st {
-    group_label: "Properties"
-    type: number
-    sql: ${TABLE}.property_ships_from_july_31_st ;;
-  }
+  # dimension: property_ships_from_july_31_st {
+  #   group_label: "Properties"
+  #   type: number
+  #   sql: ${TABLE}.property_ships_from_july_31_st ;;
+  # }
 
   dimension: quantity {
     type: number
@@ -194,6 +200,7 @@ view: order_line {
   }
 
   dimension: requires_shipping {
+    hidden: yes
     type: yesno
     sql: ${TABLE}.requires_shipping ;;
   }
@@ -234,7 +241,7 @@ view: order_line {
     label: "Number of Line Items"
     type: count_distinct
     sql: ${id} ;;
-    drill_fields: [id, property_discount_name, name]
+    drill_fields: [id, name]
     filters: [id: "NOT NULL"]
   }
   measure: sum {
@@ -256,5 +263,17 @@ view: order_line {
     value_format_name: usd
     sql: ${pre_tax_price}*${quantity} ;;
   }
-
+  measure: discount_total {
+    type: sum_distinct
+    sql_distinct_key: ${id} ;;
+    description: "Total discount"
+    value_format_name: decimal_2
+    sql: ${total_discount} ;;
+  }
+  measure: markdown_total {
+    type: number
+    description: "Original price - Price before tax"
+    value_format_name: decimal_2
+    sql: ${total_price}-${total_pre_tax_price};;
+  }
 }
