@@ -3,6 +3,8 @@ view: woh {
       explore_source: product_variant {
         column: sku {}
         column: inventory_quantity {}
+        column: compare_at_price {}
+        column: price {}
         column: category { field: vu_product_data_au.category }
         column: color { field: vu_product_data_au.color }
         column: material { field: vu_product_data_au.material }
@@ -32,6 +34,8 @@ view: woh {
       }
     }
     dimension: sku {}
+    dimension: compare_at_price {}
+    dimension: price {}
     dimension: inventory_quantity {
       label: "Current Inv"
       type: number
