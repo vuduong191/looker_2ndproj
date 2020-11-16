@@ -12,12 +12,14 @@ view: order {
 
   dimension: billing_address_address_1 {
     group_label: "Billing Address"
+    hidden: yes
     type: string
     sql: ${TABLE}.billing_address_address_1 ;;
   }
 
   dimension: billing_address_address_2 {
     group_label: "Billing Address"
+    hidden: yes
     type: string
     sql: ${TABLE}.billing_address_address_2 ;;
   }
@@ -29,6 +31,7 @@ view: order {
   }
 
   dimension: billing_address_company {
+    hidden: yes
     type: string
     group_label: "Billing Address"
     sql: ${TABLE}.billing_address_company ;;
@@ -47,60 +50,70 @@ view: order {
   }
 
   dimension: billing_address_first_name {
+    hidden: yes
     type: string
     group_label: "Billing Address"
     sql: ${TABLE}.billing_address_first_name ;;
   }
 
   dimension: billing_address_last_name {
+    hidden: yes
     type: string
     group_label: "Billing Address"
     sql: ${TABLE}.billing_address_last_name ;;
   }
 
   dimension: billing_address_latitude {
+    hidden: yes
     type: string
     group_label: "Billing Address"
     sql: ${TABLE}.billing_address_latitude ;;
   }
 
   dimension: billing_address_longitude {
+    hidden: yes
     type: string
     group_label: "Billing Address"
     sql: ${TABLE}.billing_address_longitude ;;
   }
 
   dimension: billing_address_name {
+    hidden: yes
     type: string
     group_label: "Billing Address"
     sql: ${TABLE}.billing_address_name ;;
   }
 
   dimension: billing_address_phone {
+    hidden: yes
     type: string
     group_label: "Billing Address"
     sql: ${TABLE}.billing_address_phone ;;
   }
 
   dimension: billing_address_province {
+    hidden: yes
     type: string
     group_label: "Billing Address"
     sql: ${TABLE}.billing_address_province ;;
   }
 
   dimension: billing_address_province_code {
+    hidden: yes
     type: string
     group_label: "Billing Address"
     sql: ${TABLE}.billing_address_province_code ;;
   }
 
   dimension: billing_address_zip {
+    hidden: yes
     type: string
     group_label: "Billing Address"
     sql: ${TABLE}.billing_address_zip ;;
   }
 
   dimension: browser_ip {
+    hidden: yes
     type: string
     sql: ${TABLE}.browser_ip ;;
   }
@@ -290,12 +303,14 @@ view: order {
   }
 
   dimension: shipping_address_address_1 {
+    hidden: yes
     label: "Shipping Address"
     type: string
     sql: ${TABLE}.shipping_address_address_1 ;;
   }
 
   dimension: shipping_address_address_2 {
+    hidden: yes
     label: "Shipping Address"type: string
     sql: ${TABLE}.shipping_address_address_2 ;;
   }
@@ -307,6 +322,7 @@ view: order {
   }
 
   dimension: shipping_address_company {
+    hidden: yes
     label: "Shipping Address"
     type: string
     sql: ${TABLE}.shipping_address_company ;;
@@ -325,54 +341,63 @@ view: order {
   }
 
   dimension: shipping_address_first_name {
+    hidden: yes
     label: "Shipping Address"
     type: string
     sql: ${TABLE}.shipping_address_first_name ;;
   }
 
   dimension: shipping_address_last_name {
+    hidden: yes
     label: "Shipping Address"
     type: string
     sql: ${TABLE}.shipping_address_last_name ;;
   }
 
   dimension: shipping_address_latitude {
+    hidden: yes
     label: "Shipping Address"
     type: string
     sql: ${TABLE}.shipping_address_latitude ;;
   }
 
   dimension: shipping_address_longitude {
+    hidden: yes
     label: "Shipping Address"
     type: string
     sql: ${TABLE}.shipping_address_longitude ;;
   }
 
   dimension: shipping_address_name {
+    hidden: yes
     label: "Shipping Address"
     type: string
     sql: ${TABLE}.shipping_address_name ;;
   }
 
   dimension: shipping_address_phone {
+    hidden: yes
     label: "Shipping Address"
     type: string
     sql: ${TABLE}.shipping_address_phone ;;
   }
 
   dimension: shipping_address_province {
+    hidden: yes
     label: "Shipping Address"
     type: string
     sql: ${TABLE}.shipping_address_province ;;
   }
 
   dimension: shipping_address_province_code {
+    hidden: yes
     label: "Shipping Address"
     type: string
     sql: ${TABLE}.shipping_address_province_code ;;
   }
 
   dimension: shipping_address_zip {
+    hidden: yes
     label: "Shipping Address"
     type: string
     sql: ${TABLE}.shipping_address_zip ;;

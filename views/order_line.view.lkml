@@ -237,6 +237,14 @@ view: order_line {
     sql: ${TABLE}.vendor ;;
   }
 
+  measure: order_count {
+    label: "Number of Orders"
+    type: count_distinct
+    sql: ${order_id} ;;
+    drill_fields: [id, name]
+    filters: [order_id: "NOT NULL"]
+  }
+
   measure: count {
     label: "Number of Line Items"
     type: count_distinct
@@ -261,7 +269,7 @@ view: order_line {
     type: sum_distinct
     sql_distinct_key: ${id} ;;
     value_format_name: usd
-    sql: ${pre_tax_price}*${quantity} ;;
+    sql: ${pre_tax_price} ;;
   }
   measure: discount_total {
     type: sum_distinct
@@ -270,10 +278,10 @@ view: order_line {
     value_format_name: decimal_2
     sql: ${total_discount} ;;
   }
-  measure: markdown_total {
-    type: number
-    description: "Original price - Price before tax"
-    value_format_name: decimal_2
-    sql: ${total_price}-${total_pre_tax_price};;
-  }
+  # measure: markdown_total {
+  #   type: number
+  #   description: "Original price - Price before tax"
+  #   value_format_name: decimal_2
+  #   sql: ${total_price}-${total_pre_tax_price};;
+  # }
 }
