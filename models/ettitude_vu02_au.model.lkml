@@ -15,7 +15,7 @@ explore: order_line {
     type: left_outer
     relationship: many_to_one
     view_label: "Order"
-    fields: [order.created_date, order.created_week, order.is_cancelled, order.source_name, sum_of_sales, id, name, count, min_order_id, order.online_order, order.dynamic_timeframe, order.timeframe_picker]
+    fields: [order.created_date, order.created_raw, order.created_week, order.is_cancelled, order.source_name, sum_of_sales, id, name, count, min_order_id, order.online_order, order.dynamic_timeframe, order.timeframe_picker]
     sql_on: ${order.id}=${order_line.order_id} ;;
   }
 
@@ -125,7 +125,7 @@ explore: order_shipping_line {}
 explore: order_tag {}
 explore: order_is_b2b {}
 explore: woh {}
-
+explore: bundle_sales {}
 # temporary before inventory snapshot ready
 
 explore: affiliate_daily_performance_au {

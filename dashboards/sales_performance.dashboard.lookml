@@ -289,3 +289,69 @@
     col: 0
     width: 12
     height: 4
+  - name: product_contribution_au
+    title: Bedding - Contribution by Product
+    model: ettitude_vu02_au
+    explore: order_line
+    type: looker_bar
+    listen:
+      date_aggregation: order.timeframe_picker
+      date: order.created_date
+    filters:
+      order.online_order: 'Yes'
+      order.is_cancelled: 'No'
+      order_is_b2b.is_b2b: 'No'
+      order_is_marketing.is_marketing: 'No'
+      vu_product_data_au.category: Bedding
+    fields: [order.dynamic_timeframe, order_line.total_pre_tax_price, vu_product_data_au.product]
+    pivots: [vu_product_data_au.product]
+    sorts: [order.dynamic_timeframe, vu_product_data_au.product]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: percent
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: desc
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    series_colors:
+    Feather White - order_line.total_pre_tax_price: "#eee"
+    Grey - order_line.total_pre_tax_price: "#cfcfcf"
+    Sage - order_line.total_pre_tax_price: "#B2AC88"
+    Blue Nights - order_line.total_pre_tax_price: "#3d62bf"
+    Cloud Pink - order_line.total_pre_tax_price: "#b0576d"
+    Sand - order_line.total_pre_tax_price: "#ebba59"
+    na - order_line.total_pre_tax_price: "#9174F0"
+    Pepper - order_line.total_pre_tax_price: "#375259"
+    Starlight Blue - order_line.total_pre_tax_price: "#75E2E2"
+    show_dropoff: false
+    defaults_version: 1
+    show_null_points: true
+    interpolation: linear
+    hidden_fields:
+    row: 14
+    col: 0
+    width: 12
+    height: 4

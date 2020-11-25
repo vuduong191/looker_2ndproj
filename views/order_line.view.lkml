@@ -98,35 +98,35 @@ view: order_line {
   #   sql: ${TABLE}.property_bundle_url ;;
   # }
 
-  # dimension: property_complete_bundle {
-  #   group_label: "Properties"
-  #   type: number
-  #   sql: ${TABLE}.property_complete_bundle ;;
-  # }
+  dimension: property_complete_bundle {
+    group_label: "Properties"
+    type: number
+    sql: ${TABLE}.property_complete_bundle ;;
+  }
 
-  # dimension: property_discount {
-  #   group_label: "Properties"
-  #   type: number
-  #   sql: ${TABLE}.property_discount ;;
-  # }
+  dimension: property_discount {
+    group_label: "Properties"
+    type: number
+    sql: ${TABLE}.property_discount ;;
+  }
 
-  # dimension: property_discount_bundle {
-  #   group_label: "Properties"
-  #   type: yesno
-  #   sql: ${TABLE}.property_discount_bundle ;;
-  # }
+  dimension: property_discount_bundle {
+    group_label: "Properties"
+    type: yesno
+    sql: ${TABLE}.property_discount_bundle ;;
+  }
 
-  # dimension: property_discount_name {
-  #   group_label: "Properties"
-  #   type: string
-  #   sql: ${TABLE}.property_discount_name ;;
-  # }
+  dimension: property_discount_name {
+    group_label: "Properties"
+    type: string
+    sql: ${TABLE}.property_discount_name ;;
+  }
 
-  # dimension: property_discount_type {
-  #   group_label: "Properties"
-  #   type: string
-  #   sql: ${TABLE}.property_discount_type ;;
-  # }
+  dimension: property_discount_type {
+    group_label: "Properties"
+    type: string
+    sql: ${TABLE}.property_discount_type ;;
+  }
 
   # dimension: property_from_wishlist {
   #   group_label: "Properties"
