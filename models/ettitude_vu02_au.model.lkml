@@ -135,3 +135,19 @@ explore: affiliate_daily_performance_au {
     sql:   ;;
 }
 }
+explore: page_performance_au {}
+explore: page_performance_channel {}
+explore: impact_page {
+  join: all_page {
+    relationship: many_to_one
+    sql_on: ${impact_page.pk} = ${all_page.pk}  ;;
+  }
+}
+explore: material_page {
+  join: all_page {
+    relationship: many_to_one
+    sql_on: ${material_page.pk} = ${all_page.pk}  ;;
+  }
+}
+explore: ga_main_kpi_by_device_date_au {}
+explore: all_page {}
