@@ -3,19 +3,46 @@ connection: "klaviyo"
 # include all the views
 include: "/views/**/*.view"
 include: "/dashboards/*.dashboard"
-
+week_start_day: sunday
 datagroup: daily_datagroup {
   sql_trigger:   SELECT cast(CURRENT_DATE as string); ;;
   max_cache_age: "24 hours"
 }
 
-explore: order {}
+explore: order {
+  join: order_tag {
+    # view_label: "Order Validity Check"
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${order.id} = ${order_tag.pk2_order_id} ;;
+    fields: [value, marketing_tag_integer, sum_marketing_tag_integer, sum_b2b_tag_integer]
+  }
+  join: order_is_marketing {
+    view_label: "Order Validity Check"
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${order.id} = ${order_is_marketing.id} ;;
+  }
+  join: order_is_b2b {
+    view_label: "Order Validity Check"
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${order.id} = ${order_is_b2b.id} ;;
+  }
+  join: calendar_convert_445 {
+    relationship: many_to_one
+    sql_on: ${order.vu_date_string} = ${calendar_convert_445.date_string} ;;
+    fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
+  }
+}
+
+explore: transaction {}
 explore: order_line {
   join: order {
     type: left_outer
     relationship: many_to_one
     view_label: "Order"
-    fields: [order.created_date, order.created_raw, order.created_week, order.is_cancelled, order.source_name, sum_of_sales, id, name, count, min_order_id, order.online_order, order.dynamic_timeframe, order.timeframe_picker]
+    fields: [order.created_date, order.created_raw, order.created_week, order.is_cancelled, order.source_name,id, name, count, min_order_id, order.online_order, order.dynamic_timeframe, order.timeframe_picker]
     sql_on: ${order.id}=${order_line.order_id} ;;
   }
 
@@ -151,3 +178,16 @@ explore: material_page {
 }
 explore: ga_main_kpi_by_device_date_au {}
 explore: all_page {}
+explore: order_summary {
+  join: find_date_number {
+    type: cross
+    relationship: many_to_one
+  }
+  join: daily_refund {
+    relationship: many_to_one
+    sql_on: ${order_summary.vu_date_string} = ${daily_refund.vu_date_string} ;;
+    fields: [daily_refund.order_distinct_count, daily_refund.sum_of_refund_amount]
+  }
+}
+explore: order_summary_2 {}
+# explore: find_date_number {}

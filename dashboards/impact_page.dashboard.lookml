@@ -7,6 +7,7 @@
 
   elements:
     - name: add_a_unique_name_1608327540
+      query_timezone: Australia/Melbourne
       title: Entrances
       model: ettitude_vu02_au
       explore: impact_page
@@ -16,7 +17,7 @@
         impact_page.total_bounces, all_page.total_sessions]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc]
       limit: 500
@@ -101,7 +102,7 @@
       pivots: [impact_page.device_category]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc, impact_page.device_category]
       limit: 500
@@ -205,7 +206,7 @@
         impact_page.total_bounces, all_page.total_sessions]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc]
       limit: 500
@@ -289,7 +290,7 @@
       pivots: [impact_page.device_category]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc, impact_page.device_category]
       limit: 500
@@ -417,7 +418,7 @@
       pivots: [all_page.device_category]
       fill_fields: [all_page.date_pk]
       filters:
-        all_page.date_pk: 2020/12/13 to 2020/12/18
+        all_page.date_pk: 2020/12/14 to 2020/12/22
         all_page.device_category: "-tablet"
       sorts: [all_page.date_pk desc, all_page.device_category]
       limit: 500
@@ -469,7 +470,7 @@
         impact_page.total_bounces, all_page.total_sessions]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc]
       limit: 500
@@ -553,7 +554,7 @@
       pivots: [impact_page.device_category]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc, impact_page.device_category]
       limit: 500
@@ -639,7 +640,7 @@
         impact_page.total_bounces, all_page.total_sessions]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc]
       limit: 500
@@ -723,7 +724,7 @@
       pivots: [impact_page.device_category]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc, impact_page.device_category]
       limit: 500
@@ -810,7 +811,7 @@
         impact_page.total_bounces, all_page.total_sessions]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc]
       limit: 500
@@ -874,6 +875,7 @@
         options:
           steps: 5
       series_colors: {}
+      reference_lines: [{reference_type: line, line_value: mean, range_start: max, range_end: min, margin_top: deviation, margin_value: mean, margin_bottom: deviation, label_position: right,color: "#4e505b"}]
       defaults_version: 1
       hidden_fields: [impact_page.total_exit, impact_page.total_entrances, impact_page.total_unique_pageviews, impact_page.total_bounces,
         all_page.total_sessions, bounce_rate, unique_pageview_per_session, impact_page.total_time_on_page,
@@ -894,7 +896,7 @@
       pivots: [impact_page.device_category]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc, impact_page.device_category]
       limit: 500
@@ -982,7 +984,7 @@
         impact_page.total_bounces, all_page.total_sessions]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc]
       limit: 500
@@ -1066,7 +1068,7 @@
       pivots: [impact_page.device_category]
       fill_fields: [impact_page.date_pk]
       filters:
-        impact_page.date_pk: 2020/12/13 to 2020/12/18
+        impact_page.date_pk: 2020/12/14 to 2020/12/22
         impact_page.device_category: "-tablet"
       sorts: [impact_page.date_pk desc, impact_page.device_category]
       limit: 500
@@ -1153,7 +1155,7 @@
       pivots: [all_page.device_category]
       fill_fields: [all_page.date_pk]
       filters:
-        all_page.date_pk: 2020/12/13 to 2020/12/18
+        all_page.date_pk: 2020/12/14 to 2020/12/22
         all_page.device_category: "-tablet"
       sorts: [all_page.date_pk desc, all_page.device_category]
       limit: 500
@@ -1217,7 +1219,7 @@
       fill_fields: [page_performance_channel.date_pk]
       filters:
         page_performance_channel.page_path: "%impact%"
-        page_performance_channel.date_pk: 2020/12/13 to 2020/12/18
+        page_performance_channel.date_pk: 2020/12/14 to 2020/12/22
       sorts: [page_performance_channel.channel_grouping 0, page_performance_channel.total_entrances
           desc 0]
       limit: 500

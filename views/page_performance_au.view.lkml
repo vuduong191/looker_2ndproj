@@ -1,7 +1,7 @@
 view: page_performance_au {
   sql_table_name: `aerobic-datum-283623.google_analytics_au5_page_performance.page_performance_us`
     ;;
-// wrong table name, will update later
+# wrong table name, will update later
   dimension: _fivetran_id {
     type: string
     hidden: yes

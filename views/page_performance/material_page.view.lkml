@@ -10,7 +10,7 @@ view: material_page {
       column: total_unique_pageviews {}
       column: date_pk {}
       filters: {
-        field: page_performance_us.page_path
+        field: page_performance_au.page_path
         value: "%our-fabrics%"
       }
     }

@@ -16,7 +16,7 @@
         material_page.total_bounces, all_page.total_sessions]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc]
       limit: 500
@@ -101,7 +101,7 @@
       pivots: [material_page.device_category]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc, material_page.device_category]
       limit: 500
@@ -205,7 +205,7 @@
         material_page.total_bounces, all_page.total_sessions]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc]
       limit: 500
@@ -289,7 +289,7 @@
       pivots: [material_page.device_category]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc, material_page.device_category]
       limit: 500
@@ -417,7 +417,7 @@
       pivots: [all_page.device_category]
       fill_fields: [all_page.date_pk]
       filters:
-        all_page.date_pk: 2020/12/13 to 2020/12/18
+        all_page.date_pk: 2020/12/14 to 2020/12/22
         all_page.device_category: "-tablet"
       sorts: [all_page.date_pk desc, all_page.device_category]
       limit: 500
@@ -469,7 +469,7 @@
         material_page.total_bounces, all_page.total_sessions]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc]
       limit: 500
@@ -553,7 +553,7 @@
       pivots: [material_page.device_category]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc, material_page.device_category]
       limit: 500
@@ -639,7 +639,7 @@
         material_page.total_bounces, all_page.total_sessions]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc]
       limit: 500
@@ -723,7 +723,7 @@
       pivots: [material_page.device_category]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc, material_page.device_category]
       limit: 500
@@ -810,7 +810,7 @@
         material_page.total_bounces, all_page.total_sessions]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc]
       limit: 500
@@ -874,6 +874,7 @@
         options:
           steps: 5
       series_colors: {}
+      reference_lines: [{reference_type: line, line_value: mean, range_start: max, range_end: min, margin_top: deviation, margin_value: mean, margin_bottom: deviation, label_position: right,color: "#4e505b"}]
       defaults_version: 1
       hidden_fields: [material_page.total_exit, material_page.total_entrances, material_page.total_unique_pageviews, material_page.total_bounces,
         all_page.total_sessions, bounce_rate, unique_pageview_per_session, material_page.total_time_on_page,
@@ -894,7 +895,7 @@
       pivots: [material_page.device_category]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc, material_page.device_category]
       limit: 500
@@ -982,7 +983,7 @@
         material_page.total_bounces, all_page.total_sessions]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc]
       limit: 500
@@ -1066,7 +1067,7 @@
       pivots: [material_page.device_category]
       fill_fields: [material_page.date_pk]
       filters:
-        material_page.date_pk: 2020/12/13 to 2020/12/18
+        material_page.date_pk: 2020/12/14 to 2020/12/22
         material_page.device_category: "-tablet"
       sorts: [material_page.date_pk desc, material_page.device_category]
       limit: 500

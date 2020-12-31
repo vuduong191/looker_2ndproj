@@ -70,4 +70,5 @@ view: refund {
     type: count
     drill_fields: [id, order_line_refund.count]
   }
+
 }

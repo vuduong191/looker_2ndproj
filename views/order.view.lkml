@@ -145,7 +145,7 @@ view: order {
   }
 
   dimension: is_cancelled {
-    group_label: "Status"
+    view_label: "Order Validity Check"
     type: yesno
     sql: ${cancelled_raw} IS NOT NULL ;;
   }
@@ -176,9 +176,26 @@ view: order {
     sql: ${TABLE}.closed_at ;;
     hidden: yes
   }
-
+  filter: date_time_to_filter_au_tz {
+    type: date
+    sql: {% condition date_time_to_filter_au_tz %} ${TABLE}.created_at {% endcondition %} ;;
+  }
+  filter: date_time_to_filter_us_tz {
+    type: date
+    sql: {% condition date_time_to_filter_us_tz %} TIMESTAMP(FORMAT_DATETIME("%F %X", DATETIME(${TABLE}.created_at, "Australia/Melbourne")), "America/Los_Angeles") {% endcondition %};;
+  }
+  dimension: vu_date_string {
+    type: string
+    sql: FORMAT_DATETIME("%Y%m%d", DATETIME(${TABLE}.created_at, "Australia/Melbourne"))  ;;
+  }
+  dimension: date_simple {
+    type: date
+    convert_tz: no
+    sql: DATE(${TABLE}.created_at, "Australia/Melbourne") ;;
+  }
   dimension_group: created {
     type: time
+    datatype: datetime
     timeframes: [
       raw,
       time,
@@ -189,7 +206,8 @@ view: order {
       quarter,
       year
     ]
-    sql: ${TABLE}.created_at ;;
+    convert_tz: no
+    sql: DATETIME(${TABLE}.created_at, "Australia/Melbourne") ;;
   }
   parameter: timeframe_picker {
     label: "Date Granularity"
@@ -204,10 +222,10 @@ view: order {
     type: string
     sql:
     CASE
-    WHEN {% parameter timeframe_picker %} = 'Date' THEN CAST(${created_date} AS STRING)
-    WHEN {% parameter timeframe_picker %} = 'Week' THEN CAST(DATE_TRUNC(${created_date}, WEEK) AS STRING)
-    WHEN{% parameter timeframe_picker %} = 'Month' THEN CAST(DATE_TRUNC(${created_date}, MONTH) AS STRING)
-    WHEN{% parameter timeframe_picker %} = 'Year' THEN CAST(DATE_TRUNC(${created_date}, YEAR) AS STRING)
+      WHEN {% parameter timeframe_picker %} = 'Date' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, "Australia/Melbourne"), DAY) AS STRING)
+      WHEN {% parameter timeframe_picker %} = 'Week' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, "Australia/Melbourne"), WEEK) AS STRING)
+      WHEN {% parameter timeframe_picker %} = 'Month' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, "Australia/Melbourne"), MONTH) AS STRING)
+      WHEN {% parameter timeframe_picker %} = 'Year' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, "Australia/Melbourne"), YEAR) AS STRING)
     END ;;
   }
 
@@ -317,7 +335,7 @@ view: order {
 
   dimension: shipping_address_city {
     type: string
-    label: "Shipping Address"
+    label: "Shipping Address City"
     sql: ${TABLE}.shipping_address_city ;;
   }
 
@@ -329,13 +347,14 @@ view: order {
   }
 
   dimension: shipping_address_country {
-    label: "Shipping Address"
+    label: "Shipping Address Country"
     type: string
     sql: ${TABLE}.shipping_address_country ;;
   }
 
   dimension: shipping_address_country_code {
     label: "Shipping Address"
+    hidden: yes
     type: string
     sql: ${TABLE}.shipping_address_country_code ;;
   }
@@ -443,7 +462,6 @@ view: order {
   }
 
   dimension: total_price {
-    label: "Total Sale"
     type: number
     sql: ${TABLE}.total_price ;;
   }
@@ -490,26 +508,67 @@ view: order {
     type: count
     drill_fields: [detail*]
   }
-  measure: sum_of_sales {
-    label: "Total Sales Order Price"
-    description: "The sum of total prices on orders. Includes all line items in the orders."
+  measure: sum_of_total_price {
+    description: "Subtotal Price + Shipping + Tax (if tax is not included)"
     type: sum
+    drill_fields: [detail*]
     value_format_name: "usd"
     sql: ${total_price} ;;
   }
+
+  measure: sum_of_total_line_items_price {
+    type: sum
+    drill_fields: [detail*]
+    value_format_name: "usd"
+    sql: ${total_line_items_price} ;;
+  }
+
+  measure: sum_of_total_tax {
+    type: sum
+    drill_fields: [detail*]
+    value_format_name: "usd"
+    sql: ${total_tax} ;;
+  }
+
+  measure: sum_of_subtotal_price {
+    description: "Sum(Line item prices) - Discount"
+    type: sum
+    drill_fields: [detail*]
+    value_format_name: "usd"
+    sql: ${subtotal_price} ;;
+  }
+  measure: sum_of_total_discounts {
+    type: sum
+    drill_fields: [detail*]
+    value_format_name: "usd"
+    sql: ${total_discounts} ;;
+  }
+  dimension: net_sales {
+    description: "Net sales (tax excluded, shipping fee included)"
+    sql: ${total_price}-${total_tax};;
+  }
+
+  measure: sum_of_net_sales {
+    description: "tax excluded, shipping fee included"
+    type: sum
+    drill_fields: [detail*]
+    value_format_name: "usd"
+    sql: ${net_sales} ;;
+  }
+
+  dimension: shipping_required {
+    view_label: "Order Validity Check"
+    type: yesno
+    sql: ${TABLE}.shipping_address_country IS NOT NULL;;
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
       id,
       created_date,
-      shipping_address_first_name,
       name,
-      shipping_address_name,
       source_name,
-      shipping_address_last_name,
-      billing_address_first_name,
-      billing_address_name,
-      billing_address_last_name
     ]
   }
 }
