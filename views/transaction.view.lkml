@@ -51,12 +51,13 @@ view: transaction {
   }
   dimension: vu_date_string {
     type: string
-    sql: FORMAT_DATETIME("%Y%m%d", DATETIME(${TABLE}.created_at, "Australia/Melbourne"))  ;;
+    hidden: yes
+    sql: FORMAT_DATETIME("%Y%m%d", DATETIME(${TABLE}.created_at, '@{timezone_string}'))  ;;
   }
   dimension: date_simple {
     type: date
     convert_tz: no
-    sql: DATE(${TABLE}.created_at, "Australia/Melbourne") ;;
+    sql: DATE(${TABLE}.created_at, '@{timezone_string}') ;;
   }
   dimension: currency {
     type: string

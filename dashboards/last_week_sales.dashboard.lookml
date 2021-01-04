@@ -30,7 +30,7 @@
     - name: text_02
       type: text
       title_text: Net Sales
-      subtitle_text:  Gross Sales - Discont + Shipping. Refund and return orders are excluded.
+      subtitle_text:  Gross Sales - Discount + Shipping. Refund and return orders are excluded.
       row: 3
       col: 0
       width: 24
@@ -554,7 +554,7 @@
       #       Refund Section
     - name: text_04
       type: text
-      title_text: Refund
+      title_text: AVG Weekly Refund and AVG Weekly Refund as % of AVG Weekly Total Sales
       row: 19
       col: 0
       width: 24
@@ -643,151 +643,488 @@
       row: 21
       col: 0
       height: 6
-      width: 8
-    - name: pop_order_refund
-      # title: Untitled Visualization
+      width: 6
+
+
+
+    - name: mtd_refund
+#       title: MTD AVG Weekly
       model: ettitude_vu02_au
       explore: order_summary_2
       type: single_value
-      fields: [order_summary_2.order_count_pop_change]
+      fields: [order_summary_2.mtd_sum_of_refund_amount, order_summary_2.mtd_sum_of_total_prices,
+        order_summary_2.mtd_week_count]
       filters:
         order_summary_2.current_date_range: last week
-      limit: 500
-      query_timezone: America/Los_Angeles
-      custom_color_enabled: true
-      show_single_value_title: true
-      show_comparison: false
-      comparison_type: progress_percentage
-      comparison_reverse_colors: false
-      show_comparison_label: true
-      enable_conditional_formatting: true
-      conditional_formatting_include_totals: false
-      conditional_formatting_include_nulls: false
-      custom_color: "#4d578c"
-      conditional_formatting: [{type: greater than, value: 0, background_color: '', font_color: "#657863",
-        color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0},
-        bold: false, italic: false, strikethrough: false, fields: !!null ''}, {type: less
-        than, value: 0, background_color: '', font_color: "#C68381", color_application: {
-          collection_id: ettitude, palette_id: ettitude-sequential-0}, bold: false,
-        italic: false, strikethrough: false, fields: !!null ''}]
-      single_value_title: "% Change vs previous week"
-      value_format: "#.00%"
-      x_axis_gridlines: false
-      y_axis_gridlines: true
-      show_view_names: false
-      show_y_axis_labels: true
-      show_y_axis_ticks: true
-      y_axis_tick_density: default
-      y_axis_tick_density_custom: 5
-      show_x_axis_label: true
-      show_x_axis_ticks: true
-      y_axis_scale_mode: linear
-      x_axis_reversed: false
-      y_axis_reversed: false
-      plot_size_by_field: false
-      trellis: ''
-      stacking: ''
-      limit_displayed_rows: false
-      legend_position: center
-      point_style: none
-      show_value_labels: false
-      label_density: 25
-      x_axis_scale: auto
-      y_axis_combined: true
-      ordering: none
-      show_null_labels: false
-      show_totals_labels: false
-      show_silhouette: false
-      totals_color: "#808080"
-      defaults_version: 1
-      series_types: {}
-      hidden_fields: []
-      row: 21
-      col: 8
-      height: 6
-      width: 4
-    - name: yoy_refund
-      # title: Untitled Visualization
-      model: ettitude_vu02_au
-      explore: order_summary_2
-      type: single_value
-      fields: [order_summary_2.order_count_yoy_change]
-      filters:
-        order_summary_2.current_date_range: last week
-      limit: 500
-      query_timezone: America/Los_Angeles
-      custom_color_enabled: true
-      show_single_value_title: true
-      show_comparison: false
-      comparison_type: progress_percentage
-      comparison_reverse_colors: false
-      show_comparison_label: true
-      enable_conditional_formatting: true
-      conditional_formatting_include_totals: false
-      conditional_formatting_include_nulls: false
-      custom_color: "#4d578c"
-      single_value_title: "% Change YOY"
-      value_format: "#.00%"
-      comparison_label: Previous week
-      conditional_formatting: [{type: greater than, value: 0, background_color: '', font_color: "#657863",
-          color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0},
-          bold: false, italic: false, strikethrough: false, fields: !!null ''}, {type: less
-            than, value: 0, background_color: '', font_color: "#C68381", color_application: {
-            collection_id: ettitude, palette_id: ettitude-sequential-0}, bold: false,
-          italic: false, strikethrough: false, fields: !!null ''}]
-      x_axis_gridlines: false
-      y_axis_gridlines: true
-      show_view_names: false
-      show_y_axis_labels: true
-      show_y_axis_ticks: true
-      y_axis_tick_density: default
-      y_axis_tick_density_custom: 5
-      show_x_axis_label: true
-      show_x_axis_ticks: true
-      y_axis_scale_mode: linear
-      x_axis_reversed: false
-      y_axis_reversed: false
-      plot_size_by_field: false
-      trellis: ''
-      stacking: ''
-      limit_displayed_rows: false
-      legend_position: center
-      point_style: none
-      show_value_labels: false
-      label_density: 25
-      x_axis_scale: auto
-      y_axis_combined: true
-      ordering: none
-      show_null_labels: false
-      show_totals_labels: false
-      show_silhouette: false
-      totals_color: "#808080"
-      defaults_version: 1
-      series_types: {}
-      hidden_fields: []
-      row: 21
-      col: 12
-      height: 6
-      width: 4
-    - name: 8_weeks_refund
-      title: Last 8 Week Refund and % of Total Sales
-      model: ettitude_vu02_au
-      explore: order_summary_2
-      type: looker_column
-      fields: [order_summary_2.sum_of_refund_amount, order_summary_2.445_week, order_summary_2.date_number_445_full,
-        order_summary_2.sum_of_total_price]
-      filters:
-      order_summary_2.date_time_to_filter_us_tz: 8 weeks ago for 8 weeks
-      sorts: [order_summary_2.date_number_445_full]
+      sorts: [order_summary_2.mtd_sum_of_total_prices desc]
       limit: 500
       dynamic_fields:
-      - table_calculation: of_total_sales
+      - table_calculation: mtd_avg_weekly_refund
+        label: mtd_avg_weekly_refund
+        expression: "${order_summary_2.mtd_sum_of_refund_amount}/${order_summary_2.mtd_week_count}"
+        value_format:
+        value_format_name: usd
+        _kind_hint: measure
+        _type_hint: number
+      - table_calculation: mtd_refund_prc_total_sales
+        label: mtd_refund_prc_total_sales
+        expression: "${order_summary_2.mtd_sum_of_total_prices}/${order_summary_2.mtd_week_count}"
+        value_format:
+        value_format_name: usd
+        _kind_hint: measure
+        _type_hint: number
+      query_timezone: America/Los_Angeles
+      custom_color_enabled: true
+      show_single_value_title: true
+      show_comparison: true
+      comparison_type: progress_percentage
+      comparison_reverse_colors: false
+      show_comparison_label: false
+      enable_conditional_formatting: false
+      conditional_formatting_include_totals: false
+      conditional_formatting_include_nulls: false
+      custom_color: "#4d578c"
+      single_value_title: MTD
+      value_format: "$###,###"
+#       comparison_label: Total Sales
+      conditional_formatting: [{type: greater than, value: 0, background_color: '', font_color: "#657863",
+          color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0,
+            __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 856},
+          bold: false, italic: false, strikethrough: false, fields: !!null '', __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 855}, {type: less than, value: 0, background_color: '', font_color: "#C68381",
+          color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0,
+            __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 859},
+          bold: false, italic: false, strikethrough: false, fields: !!null '', __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 857}]
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: false
+      y_axes: [{label: '', orientation: left, series: [{axisId: order_summary_2.sum_of_refund_amount,
+              id: order_summary_2.sum_of_refund_amount, name: Sum of Refund Amount, __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+              __LINE_NUM: 824}], showLabels: true, showValues: true, valueFormat: "$###,###",
+          unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear,
+          __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 824},
+        {label: '', orientation: right, series: [{axisId: of_total_sales, id: of_total_sales,
+              name: "% of Total Sales", __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+              __LINE_NUM: 828}], showLabels: true, showValues: true, unpinAxis: false,
+          tickDensity: default, type: linear, __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 827}]
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      plot_size_by_field: false
+      trellis: ''
+      stacking: ''
+      limit_displayed_rows: false
+      hide_legend: false
+      legend_position: center
+      label_value_format: ''
+      series_types: {}
+      point_style: none
+      series_colors:
+        of_total_sale: "#4E505B"
+      show_value_labels: true
+      label_density: 25
+      x_axis_scale: auto
+      y_axis_combined: true
+      ordering: none
+      show_null_labels: false
+      show_dropoff: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      order_summary_2.date_time_to_filter_us_tz: 8 weeks ago for 8 weeks
       label: "% of Total Sales"
       expression: "${order_summary_2.sum_of_refund_amount}/${order_summary_2.sum_of_total_price}"
-      value_format:
       value_format_name: percent_1
       _kind_hint: measure
       _type_hint: number
+      collection_id: ettitude
+      palette_id: ettitude-categorical-0
+      options:
+      steps: 5
+      show_hide: hide
+      first_last: first
+      num_rows: 0
+      order_summary_2.count_of_refund_order: line
+      of_total_sales: "#707070"
+      order_summary_2.sum_of_refund_amount: "#8fb1cf"
+      defaults_version: 1
+      hidden_fields: [order_summary_2.mtd_sum_of_refund_amount, order_summary_2.mtd_sum_of_total_prices,
+        order_summary_2.mtd_week_count]
+      row: 21
+      col: 6
+      height: 3
+      width: 5
+
+
+    - name: last_month_refund_2
+      title: Untitled Visualization
+      model: ettitude_vu02_au
+      explore: order_summary_2
+      type: single_value
+      fields: [order_summary_2.last_month_week_count, order_summary_2.last_month_sum_of_total_prices,
+        order_summary_2.last_month_sum_of_refund_amount]
+      filters:
+        order_summary_2.current_date_range: last week
+      limit: 500
+      dynamic_fields:
+      - table_calculation: last_month_avg_weekly_refund
+        label: last_month_avg_weekly_refund
+        expression: "${order_summary_2.last_month_sum_of_refund_amount}/${order_summary_2.last_month_week_count}"
+        value_format:
+        value_format_name: usd
+        _kind_hint: measure
+        _type_hint: number
+      - table_calculation: last_month_refund_prc_total_sales
+        label: last_month_refund_prc_total_sales
+        expression: "${order_summary_2.last_month_sum_of_total_prices}/${order_summary_2.last_month_week_count}"
+        value_format:
+        value_format_name: usd
+        _kind_hint: measure
+        _type_hint: number
+      query_timezone: America/Los_Angeles
+      custom_color_enabled: true
+      show_single_value_title: true
+      show_comparison: true
+      comparison_type: progress_percentage
+      comparison_reverse_colors: false
+      show_comparison_label: false
+      enable_conditional_formatting: false
+      conditional_formatting_include_totals: false
+      conditional_formatting_include_nulls: false
+      custom_color: "#4d578c"
+      single_value_title: Last Month
+      value_format: "$###,###"
+#       comparison_label: Weekly Total Sales
+      conditional_formatting: [{type: greater than, value: 0, background_color: '', font_color: "#657863",
+          color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0,
+            __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 856},
+          bold: false, italic: false, strikethrough: false, fields: !!null '', __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 855}, {type: less than, value: 0, background_color: '', font_color: "#C68381",
+          color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0,
+            __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 859},
+          bold: false, italic: false, strikethrough: false, fields: !!null '', __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 857}]
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: false
+      y_axes: [{label: '', orientation: left, series: [{axisId: order_summary_2.sum_of_refund_amount,
+              id: order_summary_2.sum_of_refund_amount, name: Sum of Refund Amount, __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+              __LINE_NUM: 824}], showLabels: true, showValues: true, valueFormat: "$###,###",
+          unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear,
+          __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 824},
+        {label: '', orientation: right, series: [{axisId: of_total_sales, id: of_total_sales,
+              name: "% of Total Sales", __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+              __LINE_NUM: 828}], showLabels: true, showValues: true, unpinAxis: false,
+          tickDensity: default, type: linear, __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 827}]
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      plot_size_by_field: false
+      trellis: ''
+      stacking: ''
+      limit_displayed_rows: false
+      hide_legend: false
+      legend_position: center
+      label_value_format: ''
+      series_types: {}
+      point_style: none
+      series_colors:
+        of_total_sale: "#4E505B"
+      show_value_labels: true
+      label_density: 25
+      x_axis_scale: auto
+      y_axis_combined: true
+      ordering: none
+      show_null_labels: false
+      show_dropoff: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      order_summary_2.date_time_to_filter_us_tz: 8 weeks ago for 8 weeks
+      label: "% of Total Sales"
+      expression: "${order_summary_2.sum_of_refund_amount}/${order_summary_2.sum_of_total_price}"
+      value_format_name: percent_1
+      _kind_hint: measure
+      _type_hint: number
+      collection_id: ettitude
+      palette_id: ettitude-categorical-0
+      options:
+      steps: 5
+      show_hide: hide
+      first_last: first
+      num_rows: 0
+      order_summary_2.count_of_refund_order: line
+      of_total_sales: "#707070"
+      order_summary_2.sum_of_refund_amount: "#8fb1cf"
+      defaults_version: 1
+      hidden_fields: [order_summary_2.last_month_week_count, order_summary_2.last_month_sum_of_total_prices,
+        order_summary_2.last_month_sum_of_refund_amount]
+      row: 24
+      col: 6
+      height: 3
+      width: 5
+
+    - name: last_quarter_refund
+#       title: Untitled Visualization
+      model: ettitude_vu02_au
+      explore: order_summary_2
+      type: single_value
+      fields: [order_summary_2.last_quarter_sum_of_refund_amount, order_summary_2.last_quarter_sum_of_total_prices]
+      filters:
+        order_summary_2.current_date_range: last week
+      limit: 500
+      dynamic_fields:
+      - table_calculation: last_quarter_weekly_refund
+        label: last_quarter_weekly_refund
+        expression: "${order_summary_2.last_quarter_sum_of_refund_amount}/13"
+        value_format:
+        value_format_name: usd
+        _kind_hint: measure
+        _type_hint: number
+      - table_calculation: last_quarter_weekly_total_prices
+        label: last_quarter_weekly_total_prices
+        expression: "${order_summary_2.last_quarter_sum_of_total_prices}/13"
+        value_format:
+        value_format_name: usd
+        _kind_hint: measure
+        _type_hint: number
+      query_timezone: America/Los_Angeles
+      custom_color_enabled: true
+      show_single_value_title: true
+      show_comparison: true
+      comparison_type: progress_percentage
+      comparison_reverse_colors: false
+      show_comparison_label: false
+      enable_conditional_formatting: false
+      conditional_formatting_include_totals: false
+      conditional_formatting_include_nulls: false
+      custom_color: "#4d578c"
+      single_value_title: Last Quarter
+      value_format: "$###,###"
+      comparison_label: Weekly Total Sales
+      conditional_formatting: [{type: greater than, value: 0, background_color: '', font_color: "#657863",
+          color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0,
+            __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 856},
+          bold: false, italic: false, strikethrough: false, fields: !!null '', __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 855}, {type: less than, value: 0, background_color: '', font_color: "#C68381",
+          color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0,
+            __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 859},
+          bold: false, italic: false, strikethrough: false, fields: !!null '', __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 857}]
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: false
+      y_axes: [{label: '', orientation: left, series: [{axisId: order_summary_2.sum_of_refund_amount,
+              id: order_summary_2.sum_of_refund_amount, name: Sum of Refund Amount, __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+              __LINE_NUM: 824}], showLabels: true, showValues: true, valueFormat: "$###,###",
+          unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear,
+          __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 824},
+        {label: '', orientation: right, series: [{axisId: of_total_sales, id: of_total_sales,
+              name: "% of Total Sales", __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+              __LINE_NUM: 828}], showLabels: true, showValues: true, unpinAxis: false,
+          tickDensity: default, type: linear, __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 827}]
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      plot_size_by_field: false
+      trellis: ''
+      stacking: ''
+      limit_displayed_rows: false
+      hide_legend: false
+      legend_position: center
+      label_value_format: ''
+      series_types: {}
+      point_style: none
+      series_colors:
+        of_total_sale: "#4E505B"
+      show_value_labels: true
+      label_density: 25
+      x_axis_scale: auto
+      y_axis_combined: true
+      ordering: none
+      show_null_labels: false
+      show_dropoff: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      order_summary_2.date_time_to_filter_us_tz: 8 weeks ago for 8 weeks
+      label: "% of Total Sales"
+      expression: "${order_summary_2.sum_of_refund_amount}/${order_summary_2.sum_of_total_price}"
+      value_format_name: percent_1
+      _kind_hint: measure
+      _type_hint: number
+      collection_id: ettitude
+      palette_id: ettitude-categorical-0
+      options:
+      steps: 5
+      show_hide: hide
+      first_last: first
+      num_rows: 0
+      order_summary_2.count_of_refund_order: line
+      of_total_sales: "#707070"
+      order_summary_2.sum_of_refund_amount: "#8fb1cf"
+      defaults_version: 1
+      hidden_fields: [order_summary_2.last_quarter_sum_of_refund_amount, order_summary_2.last_quarter_sum_of_total_prices]
+      row: 21
+      col: 11
+      height: 3
+      width: 5
+
+    - name: same_quarter_ly_refund
+#       title: Untitled Visualization
+      model: ettitude_vu02_au
+      explore: order_summary_2
+      type: single_value
+      fields: [order_summary_2.same_quarter_ly_sum_of_refund_amount, order_summary_2.same_quarter_ly_sum_of_total_prices]
+      filters:
+        order_summary_2.current_date_range: last week
+      limit: 500
+      dynamic_fields:
+      - table_calculation: last_quarter_weekly_refund
+        label: last_quarter_weekly_refund
+        expression: "${order_summary_2.same_quarter_ly_sum_of_refund_amount}/13"
+        value_format:
+        value_format_name: usd
+        _kind_hint: measure
+        _type_hint: number
+      - table_calculation: last_quarter_weekly_total_prices
+        label: last_quarter_weekly_total_prices
+        expression: "${order_summary_2.same_quarter_ly_sum_of_total_prices}/13"
+        value_format:
+        value_format_name: usd
+        _kind_hint: measure
+        _type_hint: number
+      query_timezone: America/Los_Angeles
+      custom_color_enabled: true
+      show_single_value_title: true
+      show_comparison: true
+      comparison_type: progress_percentage
+      comparison_reverse_colors: false
+      show_comparison_label: false
+      enable_conditional_formatting: false
+      conditional_formatting_include_totals: false
+      conditional_formatting_include_nulls: false
+      custom_color: "#4d578c"
+      single_value_title: Same Q LY
+      value_format: "$###,###"
+      comparison_label: Weekly Total Sales
+      conditional_formatting: [{type: greater than, value: 0, background_color: '', font_color: "#657863",
+          color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0,
+            __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 856},
+          bold: false, italic: false, strikethrough: false, fields: !!null '', __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 855}, {type: less than, value: 0, background_color: '', font_color: "#C68381",
+          color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0,
+            __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 859},
+          bold: false, italic: false, strikethrough: false, fields: !!null '', __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 857}]
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: false
+      y_axes: [{label: '', orientation: left, series: [{axisId: order_summary_2.sum_of_refund_amount,
+              id: order_summary_2.sum_of_refund_amount, name: Sum of Refund Amount, __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+              __LINE_NUM: 824}], showLabels: true, showValues: true, valueFormat: "$###,###",
+          unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear,
+          __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 824},
+        {label: '', orientation: right, series: [{axisId: of_total_sales, id: of_total_sales,
+              name: "% of Total Sales", __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+              __LINE_NUM: 828}], showLabels: true, showValues: true, unpinAxis: false,
+          tickDensity: default, type: linear, __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 827}]
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      plot_size_by_field: false
+      trellis: ''
+      stacking: ''
+      limit_displayed_rows: false
+      hide_legend: false
+      legend_position: center
+      label_value_format: ''
+      series_types: {}
+      point_style: none
+      series_colors:
+        of_total_sale: "#4E505B"
+      show_value_labels: true
+      label_density: 25
+      x_axis_scale: auto
+      y_axis_combined: true
+      ordering: none
+      show_null_labels: false
+      show_dropoff: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      order_summary_2.date_time_to_filter_us_tz: 8 weeks ago for 8 weeks
+      label: "% of Total Sales"
+      expression: "${order_summary_2.sum_of_refund_amount}/${order_summary_2.sum_of_total_price}"
+      value_format_name: percent_1
+      _kind_hint: measure
+      _type_hint: number
+      collection_id: ettitude
+      palette_id: ettitude-categorical-0
+      options:
+      steps: 5
+      show_hide: hide
+      first_last: first
+      num_rows: 0
+      order_summary_2.count_of_refund_order: line
+      of_total_sales: "#707070"
+      order_summary_2.sum_of_refund_amount: "#8fb1cf"
+      defaults_version: 1
+      hidden_fields: [order_summary_2.same_quarter_ly_sum_of_refund_amount, order_summary_2.same_quarter_ly_sum_of_total_prices]
+      row: 24
+      col: 11
+      height: 3
+      width: 5
+
+
+    - name: 8_weeks_refund
+      title: Last 8 weeks
+      model: ettitude_vu02_au
+      explore: order_summary_2
+      type: looker_column
+      fields: [order_summary_2.445_week, order_summary_2.date_number_445_full, order_summary_2.sum_of_refund_amount,
+        order_summary_2.sum_of_total_price]
+      filters:
+        order_summary_2.date_time_to_filter_us_tz: 8 weeks ago for 8 weeks
+      sorts: [order_summary_2.date_number_445_full]
+      limit: 500
+      dynamic_fields:
+      - table_calculation: of_total_sale
+        label: "% of Total Sale"
+        expression: "${order_summary_2.sum_of_refund_amount}/${order_summary_2.sum_of_total_price}"
+        value_format:
+        value_format_name: percent_1
+        _kind_hint: measure
+        _type_hint: number
       query_timezone: America/Los_Angeles
       x_axis_gridlines: false
       y_axis_gridlines: true
@@ -816,36 +1153,41 @@
       show_totals_labels: false
       show_silhouette: false
       totals_color: "#808080"
-      color_application:
+      y_axes: [{label: '', orientation: left, series: [{axisId: order_summary_2.sum_of_refund_amount,
+              id: order_summary_2.sum_of_refund_amount, name: Sum of Refund Amount}],
+          showLabels: true, showValues: true, valueFormat: "$###,###", unpinAxis: false,
+          tickDensity: default, tickDensityCustom: 5, type: linear}, {label: '', orientation: right,
+          series: [{axisId: of_total_sale, id: of_total_sale, name: "% of Total Sale"}],
+          showLabels: true, showValues: true, unpinAxis: false, tickDensity: default,
+          type: linear}]
+      hide_legend: false
+      label_value_format: ''
+      series_types:
+        of_total_sale: line
+      series_colors:
+        of_total_sale: "#4E505B"
+      show_dropoff: false
+      order_summary_2.date_time_to_filter_us_tz: 8 weeks ago for 8 weeks
+      label: "% of Total Sales"
+      expression: "${order_summary_2.sum_of_refund_amount}/${order_summary_2.sum_of_total_price}"
+      value_format: "$###,###"
+      value_format_name: percent_1
+      _kind_hint: measure
+      _type_hint: number
       collection_id: ettitude
       palette_id: ettitude-categorical-0
       options:
       steps: 5
-      y_axes: [{label: '', orientation: left, series: [{axisId: order_summary_2.sum_of_refund_amount,
-        id: order_summary_2.sum_of_refund_amount, name: Sum of Refund Amount}],
-      showLabels: true, showValues: true, valueFormat: "$###,###", unpinAxis: false,
-      tickDensity: default, tickDensityCustom: 5, type: linear}, {label: '', orientation: right,
-      series: [{axisId: of_total_sales, id: of_total_sales, name: "% of Total Sales"}],
-      showLabels: true, showValues: true, unpinAxis: false, tickDensity: default,
-      type: linear}]
-      limit_displayed_rows_values:
       show_hide: hide
       first_last: first
       num_rows: 0
-      hide_legend: false
-      label_value_format: ''
-      series_types:
       order_summary_2.count_of_refund_order: line
-      of_total_sales: line
-      series_colors:
-      order_summary_2.sum_of_refund_amount: "#8fb1cf"
       of_total_sales: "#707070"
-      show_dropoff: false
+      order_summary_2.sum_of_refund_amount: "#8fb1cf"
       custom_color_enabled: true
       custom_color: "#4d578c"
       show_single_value_title: true
       single_value_title: Previous Net Sales
-      value_format: "$###,###"
       show_comparison: false
       comparison_type: progress_percentage
       comparison_reverse_colors: false
@@ -853,11 +1195,14 @@
       comparison_label: Previous week
       enable_conditional_formatting: false
       conditional_formatting: [{type: greater than, value: 0, background_color: '', font_color: "#657863",
-        color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0},
-        bold: false, italic: false, strikethrough: false, fields: !!null ''}, {type: less
-        than, value: 0, background_color: '', font_color: "#C68381", color_application: {
-        collection_id: ettitude, palette_id: ettitude-sequential-0}, bold: false,
-        italic: false, strikethrough: false, fields: !!null ''}]
+          color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0,
+            __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 998},
+          bold: false, italic: false, strikethrough: false, fields: !!null '', __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 997}, {type: less than, value: 0, background_color: '', font_color: "#C68381",
+          color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0,
+            __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml, __LINE_NUM: 1002},
+          bold: false, italic: false, strikethrough: false, fields: !!null '', __FILE: ettitude_vu02_au/dashboards/last_week_sales.dashboard.lookml,
+          __LINE_NUM: 1001}]
       conditional_formatting_include_totals: false
       conditional_formatting_include_nulls: false
       defaults_version: 1

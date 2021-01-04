@@ -176,26 +176,22 @@ view: order {
     sql: ${TABLE}.closed_at ;;
     hidden: yes
   }
-  filter: date_time_to_filter_au_tz {
-    type: date
-    sql: {% condition date_time_to_filter_au_tz %} ${TABLE}.created_at {% endcondition %} ;;
-  }
   filter: date_time_to_filter_us_tz {
     type: date
-    sql: {% condition date_time_to_filter_us_tz %} TIMESTAMP(FORMAT_DATETIME("%F %X", DATETIME(${TABLE}.created_at, "Australia/Melbourne")), "America/Los_Angeles") {% endcondition %};;
+    sql: {% condition date_time_to_filter_us_tz %} TIMESTAMP(FORMAT_DATETIME("%F %X", DATETIME(${TABLE}.created_at, '@{timezone_string}')), "America/Los_Angeles") {% endcondition %};;
   }
   dimension: vu_date_string {
+    description: "Date in yyyymmdd format"
     type: string
-    sql: FORMAT_DATETIME("%Y%m%d", DATETIME(${TABLE}.created_at, "Australia/Melbourne"))  ;;
+    sql: FORMAT_DATETIME("%Y%m%d", DATETIME(${TABLE}.created_at, '@{timezone_string}'))  ;;
   }
   dimension: date_simple {
     type: date
     convert_tz: no
-    sql: DATE(${TABLE}.created_at, "Australia/Melbourne") ;;
+    sql: DATE(${TABLE}.created_at, '@{timezone_string}') ;;
   }
   dimension_group: created {
     type: time
-    datatype: datetime
     timeframes: [
       raw,
       time,
@@ -207,7 +203,7 @@ view: order {
       year
     ]
     convert_tz: no
-    sql: DATETIME(${TABLE}.created_at, "Australia/Melbourne") ;;
+    sql: ${TABLE}.created_at ;;
   }
   parameter: timeframe_picker {
     label: "Date Granularity"
@@ -222,10 +218,10 @@ view: order {
     type: string
     sql:
     CASE
-      WHEN {% parameter timeframe_picker %} = 'Date' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, "Australia/Melbourne"), DAY) AS STRING)
-      WHEN {% parameter timeframe_picker %} = 'Week' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, "Australia/Melbourne"), WEEK) AS STRING)
-      WHEN {% parameter timeframe_picker %} = 'Month' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, "Australia/Melbourne"), MONTH) AS STRING)
-      WHEN {% parameter timeframe_picker %} = 'Year' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, "Australia/Melbourne"), YEAR) AS STRING)
+      WHEN {% parameter timeframe_picker %} = 'Date' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, '@{timezone_string}'), DAY) AS STRING)
+      WHEN {% parameter timeframe_picker %} = 'Week' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, '@{timezone_string}'), WEEK) AS STRING)
+      WHEN {% parameter timeframe_picker %} = 'Month' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, '@{timezone_string}'), MONTH) AS STRING)
+      WHEN {% parameter timeframe_picker %} = 'Year' THEN CAST(DATE_TRUNC(DATE(${TABLE}.created_at, '@{timezone_string}'), YEAR) AS STRING)
     END ;;
   }
 
@@ -441,6 +437,7 @@ view: order {
   }
 
   dimension: test {
+    hidden: yes
     type: yesno
     sql: ${TABLE}.test ;;
   }

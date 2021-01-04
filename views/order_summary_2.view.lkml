@@ -32,6 +32,42 @@ view: order_summary_2 {
   dimension: current_date_number_445_end_constant {
     type: number
   }
+  dimension: current_date_445_year {
+    hidden: yes
+    type: number
+    sql: FLOOR(${current_date_number_445_start_constant}/1000000);;
+  }
+  dimension: current_date_445_month {
+    type: number
+    hidden: yes
+    sql: MOD(CAST(FLOOR(${current_date_number_445_start_constant}/100) AS INT64),100);;
+  }
+  dimension: current_date_445_quarter {
+    type: number
+    hidden: yes
+    sql: MOD(CAST(FLOOR(${current_date_number_445_start_constant}/10000) AS INT64),100);;
+  }
+  dimension: last_quarter_date_num_start {
+    type: number
+    # hidden: yes
+    sql:  CASE
+            WHEN ${current_date_445_month}<4 THEN (${current_date_445_year}-1)*1000000+40000+1000
+            ELSE ${current_date_445_year}*1000000+(${current_date_445_quarter}-1)*10000
+          END;;
+  }
+  dimension: last_month_date_num_start {
+    type: number
+    # hidden: yes
+    sql:  CASE
+            WHEN ${current_date_445_month}=1 THEN (${current_date_445_year}-1)*1000000+40000+1200
+            ELSE ${current_date_445_year}*1000000+${current_date_445_quarter}*10000+ (${current_date_445_month}-1)*100
+          END;;
+  }
+  dimension: current_date_445_week {
+    type: number
+    hidden: yes
+    sql: CAST(RIGHT(${current_date_number_445_start_constant}, 2) AS INT64);;
+  }
   dimension: current_date_number_445_start_constant {
     type: number
   }
@@ -46,6 +82,7 @@ view: order_summary_2 {
     type: date
     convert_tz: no
   }
+
   measure: sum_of_net_sales {
     description: "tax excluded, shipping fee included"
     value_format: "$#,##0.00"
@@ -107,7 +144,7 @@ view: order_summary_2 {
   }
   filter: date_time_to_filter_us_tz {
     type: date
-    sql: {% condition date_time_to_filter_us_tz %} TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, "Australia/Melbourne")), "America/Los_Angeles") {% endcondition %};;
+    sql: {% condition date_time_to_filter_us_tz %} TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, '@{timezone_string}')), "America/Los_Angeles") {% endcondition %};;
   }
   filter: current_date_range {
     type: date
@@ -115,7 +152,7 @@ view: order_summary_2 {
     convert_tz: no
     label: "1. Current Date Range"
     description: "Select the current date range you are interested in. Make sure any other filter on Event Date covers this period, or is removed."
-    sql: ${period} IS NOT NULL ;;
+    # sql: ${period} IS NOT NULL ;;
   }
   dimension: period {
     view_label: "_PoP"
@@ -125,9 +162,9 @@ view: order_summary_2 {
     sql:
         {% if current_date_range._is_filtered %}
             CASE
-            WHEN {% condition current_date_range %} TIMESTAMP(FORMAT_DATE("%F", DATE(${TABLE}.date_simple, "Australia/Melbourne")), "America/Los_Angeles") {% endcondition %}
+            WHEN {% condition current_date_range %} TIMESTAMP(FORMAT_DATE("%F", DATE(${TABLE}.date_simple, '@{timezone_string}')), "America/Los_Angeles") {% endcondition %}
             THEN 'This '
-            WHEN DATE(TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, "Australia/Melbourne")), "America/Los_Angeles")) between ${period_2_start} and ${period_2_end}
+            WHEN DATE(TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, '@{timezone_string}')), "America/Los_Angeles")) between ${period_2_start} and ${period_2_end}
             THEN 'Last period'
             WHEN (CAST(${date_number_445_full} AS INT64) >= CAST(${last_year_date_number_selected_start} AS INT64)) AND (CAST(${date_number_445_full} AS INT64) <= CAST(${last_year_date_number_selected_end} AS INT64)) THEN 'Last year'
             END
@@ -138,11 +175,13 @@ view: order_summary_2 {
   }
 
   dimension: last_year_date_number_selected_start {
+    hidden: yes
     type: number
     # hidden: yes
     sql: ${current_date_number_445_start_constant}-1000000 ;;
   }
   dimension: last_year_date_number_selected_end  {
+    hidden: yes
     # hidden: yes
     type: number
     sql: ${current_date_number_445_end_constant}-1000000 ;;
@@ -154,9 +193,33 @@ view: order_summary_2 {
     sql:
         {% if current_date_range._is_filtered %}
             CASE
-            WHEN {% condition current_date_range %} TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, "Australia/Melbourne")), "America/Los_Angeles") {% endcondition %} THEN 'this'
-            WHEN DATE(TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, "Australia/Melbourne")), "America/Los_Angeles")) between ${period_2_start} and ${period_2_end} THEN 'last'
+            WHEN {% condition current_date_range %} TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, '@{timezone_string}')), "America/Los_Angeles") {% endcondition %} THEN 'this'
+            WHEN DATE(TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, '@{timezone_string}')), "America/Los_Angeles")) between ${period_2_start} and ${period_2_end} THEN 'last'
             WHEN ${date_number_445_full} BETWEEN ${last_year_date_number_selected_start} AND ${last_year_date_number_selected_end} THEN 'last year'
+            END
+        {% else %} NULL {% endif %} ;;
+  }
+  dimension: month_filtered_measures {
+    # hidden: yes
+    description: "We just use this for the filtered measures"
+    type: string
+    sql:
+        {% if current_date_range._is_filtered %}
+            CASE
+            WHEN ${date_number_445_full} >=  (FLOOR(${current_date_number_445_end_constant}/100)*100) AND ${date_number_445_full} <= ${current_date_number_445_end_constant} THEN 'mtd'
+            WHEN ${date_number_445_full} >= ${last_month_date_num_start} AND ${date_number_445_full} < (FLOOR(${current_date_number_445_end_constant}/100)*100) THEN 'last month'
+            END
+        {% else %} NULL {% endif %} ;;
+  }
+  dimension: quarter_filtered_measures {
+    hidden: yes
+    description: "We just use this for the filtered measures"
+    type: string
+    sql:
+        {% if current_date_range._is_filtered %}
+            CASE
+            WHEN ${date_number_445_full} >=  ${last_quarter_date_num_start} AND ${date_number_445_full} < (${last_quarter_date_num_start} + 10000) THEN 'last quarter'
+            WHEN ${date_number_445_full} >= (${last_quarter_date_num_start}-1000000) AND ${date_number_445_full} < (${last_quarter_date_num_start} + 10000 - 1000000) THEN 'same quarter last year'
             END
         {% else %} NULL {% endif %} ;;
   }
@@ -339,6 +402,66 @@ measure: sum_of_refund_amount_yoy_change {
           ELSE (1.0 * ${current_period_sum_of_refund_amount} / NULLIF(${same_period_last_year_sum_of_refund_amount} ,0)) - 1 END ;;
   value_format_name: percent_2
 }
+  measure: mtd_sum_of_refund_amount {
+    view_label: "_PoP"
+    value_format: "$#,##0.00"
+    type: sum
+    sql: ${TABLE}.sum_of_refund_amount;;
+    filters: {
+      field: month_filtered_measures
+      value: "mtd"
+    }
+  }
+  measure: mtd_week_count{
+    view_label: "_PoP"
+    type: count_distinct
+    sql: ${TABLE}.445_week;;
+    filters: {
+      field: month_filtered_measures
+      value: "mtd"
+    }
+  }
+  measure: last_month_week_count {
+    view_label: "_PoP"
+    type: count_distinct
+    sql: ${TABLE}.445_week;;
+    filters: {
+      field: month_filtered_measures
+      value: "last month"
+    }
+  }
+  measure: last_month_sum_of_refund_amount {
+    view_label: "_PoP"
+    value_format: "$#,##0.00"
+    type: sum
+    sql: ${TABLE}.sum_of_refund_amount;;
+    filters: {
+      field: month_filtered_measures
+      value: "last month"
+    }
+  }
+  measure: last_quarter_sum_of_refund_amount {
+    view_label: "_PoP"
+    value_format: "$#,##0.00"
+    type: sum
+    sql: ${TABLE}.sum_of_refund_amount;;
+    filters: {
+      field: quarter_filtered_measures
+      value: "last quarter"
+    }
+  }
+  measure: same_quarter_ly_sum_of_refund_amount {
+    view_label: "_PoP"
+    value_format: "$#,##0.00"
+    type: sum
+    sql: ${TABLE}.sum_of_refund_amount;;
+    filters: {
+      field: quarter_filtered_measures
+      value: "same quarter last year"
+    }
+  }
+
+#  Total Price metrics
 measure: current_period_sum_of_total_prices {
   view_label: "_PoP"
   value_format: "$#,##0.00"
@@ -349,4 +472,45 @@ measure: current_period_sum_of_total_prices {
     value: "this"
   }
 }
+
+  measure: mtd_sum_of_total_prices {
+    view_label: "_PoP"
+    value_format: "$#,##0.00"
+    type: sum
+    sql: ${TABLE}.sum_of_total_price;;
+    filters: {
+      field: month_filtered_measures
+      value: "mtd"
+    }
+  }
+  measure: last_month_sum_of_total_prices {
+    view_label: "_PoP"
+    value_format: "$#,##0.00"
+    type: sum
+    sql: ${TABLE}.sum_of_total_price;;
+    filters: {
+      field: month_filtered_measures
+      value: "last month"
+    }
+  }
+  measure: last_quarter_sum_of_total_prices {
+    view_label: "_PoP"
+    value_format: "$#,##0.00"
+    type: sum
+    sql: ${TABLE}.sum_of_total_price;;
+    filters: {
+      field: quarter_filtered_measures
+      value: "last quarter"
+    }
+  }
+  measure: same_quarter_ly_sum_of_total_prices {
+    view_label: "_PoP"
+    value_format: "$#,##0.00"
+    type: sum
+    sql: ${TABLE}.sum_of_total_price;;
+    filters: {
+      field: quarter_filtered_measures
+      value: "same quarter last year"
+    }
+  }
 }

@@ -16,6 +16,7 @@ view: bundle_sales {
     }
   }
   dimension_group: createdgroup {
+    convert_tz: no
     type: time
     timeframes: [raw, date, week, month, year]
     datatype: timestamp

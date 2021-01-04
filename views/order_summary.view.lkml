@@ -111,7 +111,7 @@ view: order_summary {
     hidden: yes
     type: min
     sql:
-      CASE WHEN {% condition current_date_range %} TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, "Australia/Melbourne")), "America/Los_Angeles") {% endcondition %}
+      CASE WHEN {% condition current_date_range %} TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, '@{timezone_string}')), "America/Los_Angeles") {% endcondition %}
       THEN ${TABLE}.date_number_445_full
       ELSE NULL
       END ;;
@@ -120,7 +120,7 @@ view: order_summary {
     hidden: yes
     type: max
     sql:
-      CASE WHEN {% condition current_date_range %} TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, "Australia/Melbourne")), "America/Los_Angeles") {% endcondition %}
+      CASE WHEN {% condition current_date_range %} TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.date_simple, '@{timezone_string}')), "America/Los_Angeles") {% endcondition %}
       THEN ${TABLE}.date_number_445_full
       ELSE NULL
       END ;;
