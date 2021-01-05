@@ -245,14 +245,14 @@ view: order_line {
     filters: [order_id: "NOT NULL"]
   }
 
-  measure: count {
+  measure: count_of_line_items {
     label: "Number of Line Items"
     type: count_distinct
     sql: ${id} ;;
     drill_fields: [id, name]
     filters: [id: "NOT NULL"]
   }
-  measure: sum {
+  measure: sum_of_quantity {
     type: sum_distinct
     sql_distinct_key: ${id} ;;
     label: "Total Unit Sold"
@@ -278,6 +278,7 @@ view: order_line {
     value_format_name: decimal_2
     sql: ${total_discount} ;;
   }
+
   # measure: markdown_total {
   #   type: number
   #   description: "Original price - Price before tax"

@@ -1,5 +1,5 @@
 - dashboard: last_week_sales
-  title: Last Week Sales
+  title: Last Week Sales AU
   layout: newspaper
   preferred_viewer: dashboards-next
   refresh: 1 days
@@ -555,6 +555,7 @@
     - name: text_04
       type: text
       title_text: AVG Weekly Refund and AVG Weekly Refund as % of AVG Weekly Total Sales
+      subtitle_text: Total Sales = Net Sales + Tax
       row: 19
       col: 0
       width: 24
@@ -1211,3 +1212,368 @@
       col: 16
       height: 6
       width: 8
+
+
+
+                        #  Product Section
+    - name: text_05
+      type: text
+      title_text: Product Category Contribution
+      row: 27
+      col: 0
+      width: 24
+      height: 2
+    - name: category_contribution_01
+      title: Last Complete Week
+      model: ettitude_vu02_au
+      explore: variant_daily_sales_2
+      type: looker_bar
+      fields: [variant_daily_sales_2.current_period_net_sales, variant_daily_sales_2.category_custom_sort]
+      pivots: [variant_daily_sales_2.category_custom_sort]
+      filters:
+        variant_daily_sales_2.current_date_range: last week
+        variant_daily_sales_2.category_custom_sort: "-not_considered"
+      sorts: [variant_daily_sales_2.current_period_net_sales desc 0, variant_daily_sales_2.category_custom_sort]
+      limit: 500
+      query_timezone: America/Los_Angeles
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: false
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      plot_size_by_field: false
+      trellis: ''
+      stacking: percent
+      limit_displayed_rows: false
+      legend_position: center
+      point_style: none
+      show_value_labels: true
+      label_density: 25
+      x_axis_scale: auto
+      y_axis_combined: true
+      ordering: none
+      show_null_labels: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      series_types: {}
+      defaults_version: 1
+      value_labels: legend
+      label_type: labPer
+      row: 29
+      col: 0
+      height: 3
+      width: 8
+
+    - name: category_contribution_05
+      title: Same Week LY
+      model: ettitude_vu02_au
+      explore: variant_daily_sales_2
+      type: looker_bar
+      fields: [variant_daily_sales_2.category_custom_sort, variant_daily_sales_2.same_period_last_year_net_sales]
+      pivots: [variant_daily_sales_2.category_custom_sort]
+      filters:
+        variant_daily_sales_2.current_date_range: last week
+        variant_daily_sales_2.category_custom_sort: "-not_considered"
+      sorts: [variant_daily_sales_2.category_custom_sort]
+      limit: 500
+      query_timezone: America/Los_Angeles
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: false
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      plot_size_by_field: false
+      trellis: ''
+      stacking: percent
+      limit_displayed_rows: false
+      legend_position: center
+      point_style: none
+      show_value_labels: true
+      label_density: 25
+      x_axis_scale: auto
+      y_axis_combined: true
+      ordering: none
+      show_null_labels: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      series_types: {}
+      defaults_version: 1
+      value_labels: legend
+      label_type: labPer
+      row: 32
+      col: 0
+      height: 3
+      width: 8
+
+    - name: category_contribution_02
+      title: Last 8 Weeks
+      model: ettitude_vu02_au
+      explore: variant_daily_sales_2
+      type: looker_bar
+      fields: [variant_daily_sales_2.category_custom_sort, variant_daily_sales_2._445_week,
+        variant_daily_sales_2.total_pre_tax_price, variant_daily_sales_2.date_number_445_full]
+      pivots: [variant_daily_sales_2.category_custom_sort]
+      filters:
+        variant_daily_sales_2.category_custom_sort: "-not_considered"
+        variant_daily_sales_2.created_autz_date: 8 weeks ago for 8 weeks
+      sorts: [variant_daily_sales_2.category_custom_sort 0, variant_daily_sales_2.date_number_445_full]
+      limit: 500
+      query_timezone: America/Los_Angeles
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: false
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      plot_size_by_field: false
+      trellis: ''
+      stacking: percent
+      limit_displayed_rows: false
+      legend_position: center
+      point_style: none
+      show_value_labels: true
+      label_density: 25
+      x_axis_scale: auto
+      y_axis_combined: true
+      ordering: none
+      show_null_labels: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      series_types: {}
+      defaults_version: 1
+      value_labels: legend
+      label_type: labPer
+      hidden_fields: [variant_daily_sales_2.date_number_445_full]
+      row: 29
+      col: 8
+      height: 6
+      width: 8
+
+    - name: category_contribution_03
+      title: Last 8 Quarters
+      model: ettitude_vu02_au
+      explore: variant_daily_sales_2
+      type: looker_bar
+      fields: [variant_daily_sales_2.category_custom_sort, variant_daily_sales_2.total_pre_tax_price,
+        variant_daily_sales_2._445_quarter_text]
+      pivots: [variant_daily_sales_2.category_custom_sort]
+      filters:
+        variant_daily_sales_2.category_custom_sort: "-not_considered"
+        variant_daily_sales_2.created_autz_date: 8 quarters ago for 8 quarters
+        variant_daily_sales_2._445_quarter_text: "-NULL"
+      sorts: [variant_daily_sales_2.category_custom_sort 0, variant_daily_sales_2._445_quarter_text]
+      limit: 500
+      query_timezone: America/Los_Angeles
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_view_names: false
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      plot_size_by_field: false
+      trellis: ''
+      stacking: percent
+      limit_displayed_rows: false
+      legend_position: center
+      point_style: none
+      show_value_labels: true
+      label_density: 25
+      x_axis_scale: auto
+      y_axis_combined: true
+      ordering: none
+      show_null_labels: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      series_types: {}
+      defaults_version: 1
+      value_labels: legend
+      label_type: labPer
+      hidden_fields: []
+      row: 29
+      col: 16
+      height: 6
+      width: 8
+
+
+
+                        #  Product Section
+    - name: text_06
+      type: text
+      title_text: Product Growth
+      row: 35
+      col: 0
+      width: 24
+      height: 2
+
+
+    - name: product Growth
+      title: Growth - Top 30 Product by Sales Quantity
+      model: ettitude_vu02_au
+      explore: variant_daily_sales_2
+      type: looker_grid
+      fields: [variant_daily_sales_2.product, variant_daily_sales_2.current_period_units_sold,
+        variant_daily_sales_2.same_period_last_year_units_sold, variant_daily_sales_2.previous_period_units_sold]
+      filters:
+        variant_daily_sales_2.current_date_range: last week
+        variant_daily_sales_2.product: "-NULL"
+      sorts: [variant_daily_sales_2.current_period_units_sold desc]
+      limit: 500
+      dynamic_fields:
+      - table_calculation: previous_week_rank
+        label: Previous Week Rank
+        expression: rank(${variant_daily_sales_2.previous_period_units_sold},${variant_daily_sales_2.previous_period_units_sold})
+        value_format:
+        value_format_name: decimal_0
+        _kind_hint: measure
+        _type_hint: number
+      - table_calculation: pop_change
+        label: POP % Change
+        expression: "(${variant_daily_sales_2.current_period_units_sold}-${variant_daily_sales_2.previous_period_units_sold})/${variant_daily_sales_2.previous_period_units_sold}"
+        value_format:
+        value_format_name: percent_1
+        _kind_hint: measure
+        _type_hint: number
+      - table_calculation: yoy_change
+        label: YOY % Change
+        expression: "(${variant_daily_sales_2.current_period_units_sold}- ${variant_daily_sales_2.same_period_last_year_units_sold})/${variant_daily_sales_2.same_period_last_year_units_sold}"
+        value_format:
+        value_format_name: percent_1
+        _kind_hint: measure
+        _type_hint: number
+      query_timezone: America/Los_Angeles
+      show_view_names: false
+      show_row_numbers: true
+      transpose: false
+      truncate_text: true
+      hide_totals: false
+      hide_row_totals: false
+      size_to_fit: true
+      table_theme: white
+      limit_displayed_rows: true
+      enable_conditional_formatting: true
+      header_text_alignment: left
+      header_font_size: '12'
+      rows_font_size: '12'
+      conditional_formatting_include_totals: false
+      conditional_formatting_include_nulls: false
+      show_sql_query_menu_options: false
+      show_totals: true
+      show_row_totals: true
+      series_labels:
+        variant_daily_sales_2.current_period_units_sold: Last Week Units Sold
+        variant_daily_sales_2.previous_period_units_sold: Previous Week Unit Sold
+        previous_week_rank: Pre W Rank
+      series_column_widths:
+        variant_daily_sales_2.current_period_units_sold: 250
+        variant_daily_sales_2.previous_period_units_sold: 250
+        pop_change: 150
+        yoy_change: 150
+        last_week_rank: 150
+        previous_week_rank: 100
+      series_cell_visualizations:
+        variant_daily_sales_2.current_period_units_sold:
+          is_active: true
+          palette:
+            palette_id: ettitude-diverging-0
+            collection_id: ettitude
+        variant_daily_sales_2.previous_period_units_sold:
+          is_active: true
+          palette:
+            palette_id: ettitude-diverging-0
+            collection_id: ettitude
+        last_week_rank:
+          is_active: false
+          palette:
+            palette_id: ettitude-sequential-0
+            collection_id: ettitude
+          value_display: true
+      series_text_format:
+        pop_change:
+          align: right
+        yoy_change:
+          align: right
+        previous_week_rank:
+          align: center
+      limit_displayed_rows_values:
+        show_hide: show
+        first_last: first
+        num_rows: '30'
+      conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#C68381",
+          font_color: !!null '', color_application: {collection_id: ettitude, palette_id: ettitude-diverging-0,
+            options: {steps: 5, constraints: {min: {type: number, value: -2}, mid: {type: number,
+                  value: 0}, max: {type: number, value: 2}}, mirror: false, reverse: false,
+              stepped: false}}, bold: false, italic: false, strikethrough: false, fields: [
+            pop_change]}, {type: along a scale..., value: !!null '', background_color: "#C68381",
+          font_color: !!null '', color_application: {collection_id: ettitude, palette_id: ettitude-diverging-0,
+            options: {steps: 5, constraints: {min: {type: number, value: 0}, mid: {type: number,
+                  value: 4}, max: {type: number, value: 30}}, mirror: false, reverse: false,
+              stepped: false}}, bold: false, italic: false, strikethrough: false, fields: [
+            yoy_change]}, {type: along a scale..., value: !!null '', background_color: "#C68381",
+          font_color: !!null '', color_application: {collection_id: ettitude, palette_id: ettitude-sequential-0,
+            options: {steps: 5, constraints: {min: {type: minimum}, mid: {type: middle},
+                max: {type: maximum}}, mirror: true, reverse: true, stepped: false}},
+          bold: false, italic: false, strikethrough: false, fields: [previous_week_rank]}]
+      x_axis_gridlines: false
+      y_axis_gridlines: true
+      show_y_axis_labels: true
+      show_y_axis_ticks: true
+      y_axis_tick_density: default
+      y_axis_tick_density_custom: 5
+      show_x_axis_label: true
+      show_x_axis_ticks: true
+      y_axis_scale_mode: linear
+      x_axis_reversed: false
+      y_axis_reversed: false
+      plot_size_by_field: false
+      trellis: ''
+      stacking: percent
+      legend_position: center
+      point_style: none
+      show_value_labels: true
+      label_density: 25
+      x_axis_scale: auto
+      y_axis_combined: true
+      ordering: none
+      show_null_labels: false
+      show_totals_labels: false
+      show_silhouette: false
+      totals_color: "#808080"
+      series_types: {}
+      defaults_version: 1
+      value_labels: legend
+      label_type: labPer
+      hidden_fields: [variant_daily_sales_2.same_period_last_year_units_sold]
+      row: 37
+      col: 4
+      height: 12
+      width: 16

@@ -133,10 +133,6 @@ view: order_summary_2 {
     value_format: "#"
     sql: ${TABLE}.refund_order_distinct_count ;;
   }
-  dimension: vu_date_string {
-    primary_key: yes
-    hidden: yes
-  }
 
   filter: date_time_to_filter_au_tz {
     type: date

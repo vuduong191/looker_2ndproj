@@ -20,7 +20,7 @@
     model: ettitude_vu02_au
     explore: order_line
     type: looker_column
-    fields: [order.dynamic_timeframe, order_line.total_pre_tax_price, order_line.sum,
+    fields: [order.dynamic_timeframe, order_line.total_pre_tax_price, order_line.sum_of_quantity,
       order_line.order_count]
     listen:
       date_aggregation: order.timeframe_picker
@@ -36,7 +36,7 @@
     dynamic_fields:
     - table_calculation: basket_size
       label: basket_size
-      expression: "${order_line.sum}/${order_line.order_count}"
+      expression: "${order_line.sum_of_quantity}/${order_line.order_count}"
       value_format:
       value_format_name: decimal_1
       _kind_hint: measure
@@ -87,7 +87,7 @@
     series_types:
       order_line.order_count: line
     defaults_version: 1
-    hidden_fields: [order_line.sum, basket_size, aov]
+    hidden_fields: [order_line.sum_of_quantity, basket_size, aov]
     row: 0
     col: 0
     width: 12
@@ -97,7 +97,7 @@
     model: ettitude_vu02_au
     explore: order_line
     type: looker_column
-    fields: [order.dynamic_timeframe, order_line.total_pre_tax_price, order_line.sum,
+    fields: [order.dynamic_timeframe, order_line.total_pre_tax_price, order_line.sum_of_quantity,
       order_line.order_count]
     listen:
       date_aggregation: order.timeframe_picker
@@ -113,7 +113,7 @@
     dynamic_fields:
     - table_calculation: basket_size
       label: basket_size
-      expression: "${order_line.sum}/${order_line.order_count}"
+      expression: "${order_line.sum_of_quantity}/${order_line.order_count}"
       value_format:
       value_format_name: decimal_1
       _kind_hint: measure
@@ -162,7 +162,7 @@
     series_types:
       order_line.order_count: line
     defaults_version: 1
-    hidden_fields: [order_line.sum, order_line.total_pre_tax_price, order_line.order_count]
+    hidden_fields: [order_line.sum_of_quantity, order_line.total_pre_tax_price, order_line.order_count]
     row: 3
     col: 0
     width: 12

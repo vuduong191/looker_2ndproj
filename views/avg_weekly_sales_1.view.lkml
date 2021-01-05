@@ -5,7 +5,7 @@ view: avg_weekly_sales_1 {
         column: sku {}
         column: created_week { field: order.created_week }
         column: is_cancelled {field: order.is_cancelled}
-        column: sum {}
+        column: sum_of_quantity {}
         column: total_price {}
         column: category { field: vu_product_data_au.category }
         column: color { field: vu_product_data_au.color }

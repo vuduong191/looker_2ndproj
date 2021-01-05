@@ -42,10 +42,14 @@ explore: order_line {
     type: left_outer
     relationship: many_to_one
     view_label: "Order"
-    fields: [order.created_date, order.created_raw, order.created_week, order.is_cancelled, order.source_name,id, name, count, min_order_id, order.online_order, order.dynamic_timeframe, order.timeframe_picker]
+    fields: [order.created_autz_raw,order.created_autz_date,order.created_autz_week,order.created_autz_month, order.created_date, order.created_raw, order.created_week, order.is_cancelled, order.source_name,id, name, min_order_id, order.online_order, order.dynamic_timeframe, order.timeframe_picker, order.date_simple, order.vu_date_string]
     sql_on: ${order.id}=${order_line.order_id} ;;
   }
-
+  join: calendar_convert_445 {
+    relationship: many_to_one
+    sql_on: ${order.vu_date_string} = ${calendar_convert_445.date_string} ;;
+    fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
+  }
   join: order_tag {
     view_label: "Order Line"
     type: left_outer
@@ -191,3 +195,9 @@ explore: order_summary {
 }
 explore: order_summary_2 {}
 # explore: find_date_number {}
+explore: variant_daily_sales {
+  join: find_date_number_2 {
+    type: cross
+    relationship: many_to_one
+  }
+}explore: variant_daily_sales_2 {}

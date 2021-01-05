@@ -6,9 +6,9 @@ view: bundle_sales {
       column: property_complete_bundle {field: order_line.property_complete_bundle}
       column: created_raw { field: order.created_raw }
       column: total_pre_tax_price {}
-      column: sum {}
+      column: sum_of_quantity {}
       column: order_count {}
-      column: count {}
+      column: count_of_line_items {}
       # filters: {
       #   field: order_line.property_complete_bundle
       #   value: "1"
@@ -56,16 +56,16 @@ view: bundle_sales {
   #   value_format: "$#,##0.00"
   #   type: number
   # }
-  dimension: sum {
-    label: "Order Line Total Unit Sold"
-    value_format: "#,##0"
-    type: number
-  }
+  # dimension: sum {
+  #   label: "Order Line Total Unit Sold"
+  #   value_format: "#,##0"
+  #   type: number
+  # }
   # dimension: order_count {
   #   label: "Order Line Number of Orders"
   #   type: number
   # }
-  dimension: count {
+  dimension: count_of_line_items {
     label: "Order Line Number of Line Items"
     type: number
   }

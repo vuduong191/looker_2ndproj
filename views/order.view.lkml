@@ -205,6 +205,21 @@ view: order {
     convert_tz: no
     sql: ${TABLE}.created_at ;;
   }
+  dimension_group: created_autz {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      week_of_year,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    sql: DATE(${TABLE}.created_at, '@{timezone_string}') ;;
+  }
   parameter: timeframe_picker {
     label: "Date Granularity"
     type: string

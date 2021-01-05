@@ -11,8 +11,6 @@ view: order_summary {
       column: 445_month {field: calendar_convert_445._445_month }
       column: 445_week {field: calendar_convert_445._445_week }
       column: date_number_445_full {field:calendar_convert_445.date_number_445_full}
-      column: current_date_number_445_start {field:calendar_convert_445.current_date_number_445_start}
-      column: current_date_number_445_end {field:calendar_convert_445.current_date_number_445_end}
       column: sum_of_subtotal_price {}
       column: sum_of_total_discounts {}
       column: sum_of_total_line_items_price {}
@@ -101,12 +99,7 @@ view: order_summary {
   dimension: 445_quarter {}
   dimension: 445_week {}
   dimension: date_number_445_full {}
-  dimension: current_date_number_445_start {
-    type: number
-  }
-  dimension: current_date_number_445_end {
-    type: number
-  }
+
   measure: current_date_number_445_start_constant {
     hidden: yes
     type: min
