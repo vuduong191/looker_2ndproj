@@ -28,7 +28,7 @@ view: avg_weekly_sales_1 {
     dimension: created_week {
       type: date_week
     }
-    dimension: sum {
+    dimension: sum_of_quantity {
       label: "Order Line Total Unit Sold"
       value_format: "#,##0"
       type: number
@@ -55,7 +55,7 @@ view: avg_weekly_sales_1 {
     measure: avg_weekly_units_sold {
       type: average
       value_format: "0.00"
-      sql: ${sum} ;;
+      sql: ${sum_of_quantity} ;;
     }
     measure: avg_weekly_sales {
       type: average

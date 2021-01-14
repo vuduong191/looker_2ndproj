@@ -356,7 +356,54 @@ view: variant_daily_sales_2 {
             ELSE (1.0 * ${current_period_units_sold} / NULLIF(${same_period_last_year_units_sold} ,0)) - 1 END ;;
     value_format_name: percent_2
   }
-
+  measure: last_day {
+    type: date
+    sql: MAX(${created_autz_date}) ;;
+    convert_tz: no
+  }
+  parameter: product_grouping_picker {
+    label: "Product Grouping"
+    type: string
+    allowed_value: { value: "Category" }
+    allowed_value: { value: "Category-Product" }
+    allowed_value: { value: "Product" }
+    allowed_value: { value: "Product-Size" }
+    allowed_value: { value: "Product-Color" }
+    allowed_value: { value: "Category-Size" }
+    allowed_value: { value: "Category-Color" }
+    allowed_value: {  value: "SKU-Product-Size-Color" }
+    default_value: "Product"
+  }
+  dimension: dynamic_product_grouping {
+    type: string
+    sql:
+    CASE
+      WHEN {% parameter product_grouping_picker %} = 'Category' THEN CONCAT(IFNULL(${category},"na"))
+      WHEN {% parameter product_grouping_picker %} = 'Category-Product' THEN CONCAT(IFNULL(${category},"na"),"-", IFNULL(${product},"na"))
+      WHEN {% parameter product_grouping_picker %} = 'Category-Size' THEN CONCAT(IFNULL(${category},"na"),"-", IFNULL(${size},"na"))
+      WHEN {% parameter product_grouping_picker %} = 'Category-Color' THEN CONCAT(IFNULL(${category},"na"),"-", IFNULL(${color},"na"))
+      WHEN {% parameter product_grouping_picker %} = 'Product' THEN CONCAT(IFNULL(${product},"na"))
+      WHEN {% parameter product_grouping_picker %} = 'Product-Size' THEN CONCAT(IFNULL(${product},"na"),"-", IFNULL(${size},"na"))
+      WHEN {% parameter product_grouping_picker %} = 'Product-Color' THEN CONCAT(IFNULL(${product},"na"),"-", IFNULL(${color},"na"))
+      WHEN {% parameter product_grouping_picker %} = 'SKU-Product-Size-Color' THEN CONCAT(IFNULL(${product_variant_sku},"na"),"-",IFNULL(${product},"na"),"-",IFNULL(${size},"na"),"-", IFNULL(${color},"na"))
+    END ;;
+  }
+  dimension: pk_to_lookup {
+    # hidden: yes
+    sql: ${product_variant_sku} || ${created_autz_date} ;;
+  }
+  dimension: _445_month_text {
+    type: string
+    sql: CONCAT(${_445_year},"-", FORMAT("%02d", ${_445_month})) ;;
+  }
+  dimension: _445_week_text {
+    type: string
+    sql: CONCAT(${_445_year}, "-W", FORMAT("%02d", ${_445_week})) ;;
+  }
+  measure: _445_week_text_w_start_date {
+    type: string
+    sql: CONCAT(${_445_year}, "-W", FORMAT("%02d", ${_445_week}),"-", FORMAT_DATE("%b-%d", ${last_day})) ;;
+  }
 # Refund Metrics
 
   # measure: current_period_sum_of_refund_amount {

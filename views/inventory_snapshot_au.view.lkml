@@ -16,12 +16,15 @@ view: inventory_snapshot_au {
     datatype: date
     sql: ${TABLE}.day ;;
   }
-
   dimension: inventory_quantity {
     type: number
     sql: ${TABLE}.inventory_quantity ;;
   }
-
+  dimension: pk {
+    # hidden: yes
+    primary_key: yes
+    sql: ${sku} || ${day_date} ;;
+  }
   dimension: sku {
     type: string
     sql: ${TABLE}.product_variant_sku ;;
@@ -39,4 +42,17 @@ view: inventory_snapshot_au {
     type: count
     filters: [inventory_quantity: "<=0"]
   }
+  dimension: vu_date_string {
+    description: "Date in yyyymmdd format"
+    type: string
+    sql: FORMAT_DATETIME("%Y%m%d", ${day_date})  ;;
+  }
+
+  # measure: inventory_on_last_day_in_period{
+  #   type: max
+  #   filters: {
+  #     field: day_date
+  #     value: last_day_in_period
+  #   }
+  # }
 }

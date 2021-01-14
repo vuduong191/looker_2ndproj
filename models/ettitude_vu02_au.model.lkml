@@ -140,7 +140,12 @@ explore: product_variant {
   }
 }
 
-explore: inventory_snapshot_au {}
+explore: inventory_snapshot_au {
+  join: calendar_convert_445 {
+    relationship: many_to_one
+    sql_on: ${inventory_snapshot_au.vu_date_string} = ${calendar_convert_445.date_string} ;;
+  }
+}
 
 explore: avg_weekly_sales_2 {}
 explore: avg_weekly_sales_1 {
@@ -200,4 +205,18 @@ explore: variant_daily_sales {
     type: cross
     relationship: many_to_one
   }
-}explore: variant_daily_sales_2 {}
+  join: inventory_snapshot_au_2 {
+    relationship: many_to_one
+    sql_on: ${inventory_snapshot_au_2.pk}=${variant_daily_sales.sku_date} ;;
+  }
+}
+explore: variant_daily_sales_2 {
+  join: inventory_snapshot_au {
+    relationship: many_to_one
+    sql_on: ${variant_daily_sales_2.pk_to_lookup} = ${inventory_snapshot_au.pk} ;;
+  }
+}
+explore: calendar_convert_445 {
+}
+explore: inventory_snapshot_au_2 {}
+explore: variant_daily_sale_3 {}

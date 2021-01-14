@@ -104,6 +104,10 @@ view: variant_daily_sales {
   dimension: _445_quarter {}
   dimension: _445_week {}
   dimension: date_number_445_full {}
+  dimension: sku_date {
+    type: string
+    sql:${product_variant_sku}||${created_autz_date} ;;
+  }
 
   measure: current_date_number_445_start_constant {
     # hidden: yes
