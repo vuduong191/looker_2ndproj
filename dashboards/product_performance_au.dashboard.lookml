@@ -21,7 +21,7 @@
     model: ettitude_vu02_au
     explore: variant_daily_sales_3
     field: variant_daily_sales_3.product_grouping_picker
-    default_value: "Product"
+    default_value: "Category"
 
   - name: category
     type: field_filter
