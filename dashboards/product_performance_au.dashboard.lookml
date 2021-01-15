@@ -77,7 +77,7 @@
       width: 24
       height: 3
     - name: overall
-      title: Units Sold, Ending Inventory, Sell-through Rate by Product and Product Group
+      title: Units Sold by Product and Product Group
       model: ettitude_vu02_au
       explore: variant_daily_sales_3
       type: looker_grid
