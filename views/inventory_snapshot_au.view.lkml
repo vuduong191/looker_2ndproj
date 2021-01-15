@@ -16,6 +16,7 @@ view: inventory_snapshot_au {
     datatype: date
     sql: ${TABLE}.day ;;
   }
+
   dimension: inventory_quantity {
     type: number
     sql: ${TABLE}.inventory_quantity ;;

@@ -48,7 +48,7 @@ explore: order_line {
   join: calendar_convert_445 {
     relationship: many_to_one
     sql_on: ${order.vu_date_string} = ${calendar_convert_445.date_string} ;;
-    fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
+    # fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
   }
   join: order_tag {
     view_label: "Order Line"
@@ -162,15 +162,6 @@ explore: order_tag {}
 explore: order_is_b2b {}
 explore: woh {}
 explore: bundle_sales {}
-# temporary before inventory snapshot ready
-
-explore: affiliate_daily_performance_au {
-  join: affiliate_performance_measures {
-    view_label: "Calculated Metrics"
-    relationship: one_to_one
-    sql:   ;;
-}
-}
 explore: page_performance_au {}
 explore: page_performance_channel {}
 explore: impact_page {
@@ -199,7 +190,6 @@ explore: order_summary {
   }
 }
 explore: order_summary_2 {}
-# explore: find_date_number {}
 explore: variant_daily_sales {
   join: find_date_number_2 {
     type: cross
@@ -218,5 +208,16 @@ explore: variant_daily_sales_2 {
 }
 explore: calendar_convert_445 {
 }
-explore: inventory_snapshot_au_2 {}
-explore: variant_daily_sale_3 {}
+explore: inventory_snapshot_au_2 {
+  join: variant_daily_sales {
+    relationship: one_to_many
+    sql_on: ${inventory_snapshot_au_2.pk}=${variant_daily_sales.sku_date} ;;
+  }
+  join: vu_product_data_au {
+    type: left_outer
+    view_label: "Manual Data"
+    relationship: many_to_one
+    sql_on: ${inventory_snapshot_au_2.sku}=${vu_product_data_au.product_variant_sku} ;;
+  }
+}
+explore: variant_daily_sales_3 {}

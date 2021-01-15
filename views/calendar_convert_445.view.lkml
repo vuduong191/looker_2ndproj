@@ -53,6 +53,11 @@ view: calendar_convert_445 {
     type: string
     sql: CONCAT(${_445_year}, "-W", FORMAT("%02d", ${_445_week})) ;;
   }
+  dimension: _445_quarter_text {
+    type: string
+    sql: CONCAT(${_445_year}, "-Q", ${_445_quarter}) ;;
+  }
+
   dimension: date_number_445_quarter {
     type: number
     sql: CAST(FLOOR(${date_number_445_full}/10000) AS INT64);;
@@ -62,10 +67,7 @@ view: calendar_convert_445 {
     type: number
     sql: CAST(FLOOR(${date_number_445_full}/100) AS INT64);;
   }
-  dimension: _445_quarter_text {
-    type: string
-    sql: CONCAT(${_445_year}, "-Q", ${_445_quarter}) ;;
-  }
+
 
 # Refund
 }

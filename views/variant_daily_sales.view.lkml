@@ -5,10 +5,13 @@
 view: variant_daily_sales {
   derived_table: {
     explore_source: order_line {
-      column: _445_year {field: calendar_convert_445._445_year }
-      column: _445_quarter {field: calendar_convert_445._445_quarter }
-      column: _445_month {field: calendar_convert_445._445_month }
-      column: _445_week {field: calendar_convert_445._445_week }
+      column: _445_week { field: calendar_convert_445._445_week }
+      column: _445_month { field: calendar_convert_445._445_month }
+      column: _445_quarter { field: calendar_convert_445._445_quarter }
+      column: _445_year { field: calendar_convert_445._445_year }
+      column: _445_week_text { field: calendar_convert_445._445_week_text }
+      column: _445_month_text { field: calendar_convert_445._445_month_text }
+      column: _445_quarter_text { field: calendar_convert_445._445_quarter_text }
       column: order_name {field: order.name}
       column: date_number_445_full {field:calendar_convert_445.date_number_445_full}
       column: category { field: vu_product_data_au.category }
@@ -104,6 +107,9 @@ view: variant_daily_sales {
   dimension: _445_quarter {}
   dimension: _445_week {}
   dimension: date_number_445_full {}
+  dimension: _445_month_text {}
+  dimension: _445_quarter_text {}
+  dimension: _445_week_text {}
   dimension: sku_date {
     type: string
     sql:${product_variant_sku}||${created_autz_date} ;;

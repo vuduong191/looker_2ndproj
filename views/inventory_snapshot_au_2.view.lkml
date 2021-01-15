@@ -9,14 +9,16 @@ view: inventory_snapshot_au_2 {
       column: pk {}
       column: sku {}
       column: vu_date_string {}
+      column: day {field:inventory_snapshot_au.day_date}
+      column: _445_week { field: calendar_convert_445._445_week }
       column: _445_month { field: calendar_convert_445._445_month }
       column: _445_quarter { field: calendar_convert_445._445_quarter }
-      column: _445_week { field: calendar_convert_445._445_week }
       column: _445_year { field: calendar_convert_445._445_year }
       column: date_number { field: calendar_convert_445.date_number }
+      column: _445_week_text { field: calendar_convert_445._445_week_text }
       column: _445_month_text { field: calendar_convert_445._445_month_text }
       column: _445_quarter_text { field: calendar_convert_445._445_quarter_text }
-      column: _445_week_text { field: calendar_convert_445._445_week_text }
+
       column: date_number_445_full { field: calendar_convert_445.date_number_445_full }
       column: date_number_445_month { field: calendar_convert_445.date_number_445_month }
       column: date_number_445_quarter { field: calendar_convert_445.date_number_445_quarter }
@@ -34,6 +36,10 @@ view: inventory_snapshot_au_2 {
         sql:  FIRST_VALUE(inventory_quantity) OVER (PARTITION BY _445_year, sku ORDER BY date_string DESC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING);;
       }
     }
+  }
+  dimension: day {
+    type: date
+    convert_tz: no
   }
   dimension: inventory_quantity {
     type: number
