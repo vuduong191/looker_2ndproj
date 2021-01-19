@@ -221,3 +221,51 @@ explore: inventory_snapshot_au_2 {
   }
 }
 explore: variant_daily_sales_3 {}
+explore: facebook_ad_insight {}
+explore: google_ad{}
+explore: google_ad_daily {}
+explore: facebook_ad_daily {}
+explore: bing_ad {}
+explore: bing_ad_daily {}
+explore: rakuten_report {}
+explore: rakuten_report_daily {}
+explore: base_445_calendar {
+  join: google_ad_daily {
+    relationship: many_to_one
+    view_label: "Marketing Channel Expenses"
+    sql_on: ${base_445_calendar.date_string}=${google_ad_daily.vu_date_string} ;;
+  }
+  join: facebook_ad_daily {
+    relationship: many_to_one
+    view_label: "Marketing Channel Expenses"
+    sql_on: ${base_445_calendar.date_string}=${facebook_ad_daily.vu_date_string} ;;
+  }
+  join: rakuten_report_daily {
+    relationship: many_to_one
+    view_label: "Marketing Channel Expenses"
+    sql_on: ${base_445_calendar.date_string}=${rakuten_report_daily.vu_date_string} ;;
+  }
+  join: bing_ad_daily {
+    relationship: many_to_one
+    view_label: "Marketing Channel Expenses"
+    sql_on: ${base_445_calendar.date_string}=${bing_ad_daily.vu_date_string} ;;
+  }
+  join: order_summary {
+    relationship: many_to_one
+    view_label: "Sales Performance"
+    sql_on: ${base_445_calendar.date_string}=${order_summary.vu_date_string} ;;
+    fields: [order_summary.sum_of_net_sales,order_summary.sum_of_gross_sales,order_summary.sum_of_total_discounts, order_summary.count_of_order]
+  }
+  join: daily_refund {
+    relationship: many_to_one
+    sql_on: ${order_summary.vu_date_string} = ${daily_refund.vu_date_string} ;;
+    fields: [daily_refund.order_distinct_count, daily_refund.sum_of_refund_amount]
+  }
+  join: ga_order_count_paid_non_paid_daily {
+    relationship: many_to_one
+    sql_on: ${order_summary.vu_date_string} = ${ga_order_count_paid_non_paid_daily.vu_date_string} ;;
+    fields: [ga_order_count_paid_non_paid_daily.count_of_non_paid_orders, ga_order_count_paid_non_paid_daily.count_of_paid_orders]
+  }
+}
+explore: ga_channel_performance {}
+explore: ga_order_count_paid_non_paid_daily {}

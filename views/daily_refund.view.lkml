@@ -21,12 +21,14 @@ view: daily_refund {
   dimension: date_simple {
     type: date
   }
-  dimension: order_distinct_count {
-    type: number
+  measure: order_distinct_count {
+    value_format: "0"
+    type: sum
+    sql: ${TABLE}.order_distinct_count ;;
   }
-  dimension: sum_of_refund_amount {
+  measure: sum_of_refund_amount {
     value_format: "$###,###.00"
-    type: number
+    type: sum
     sql: ${TABLE}.sum_of_amount ;;
   }
 }

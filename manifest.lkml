@@ -8,3 +8,6 @@
 constant: timezone_string {
   value: "Australia/Melbourne"
 }
+constant: bing_acc_id {
+  value: "2739205"
+}

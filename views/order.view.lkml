@@ -556,8 +556,12 @@ view: order {
     sql: ${total_discounts} ;;
   }
   dimension: net_sales {
-    description: "Net sales (tax excluded, shipping fee included)"
+    description: "Net sales (tax excluded, shipping fee included, after discount)"
     sql: ${total_price}-${total_tax};;
+  }
+  dimension: gross_sales {
+    description: "Gross sales (tax excluded, shipping fee included, before discount)"
+    sql: ${total_price}-${total_tax}+${total_discounts};;
   }
 
   measure: sum_of_net_sales {
@@ -567,6 +571,14 @@ view: order {
     value_format_name: "usd"
     sql: ${net_sales} ;;
   }
+  measure: sum_of_gross_sales {
+    description: "tax excluded, shipping fee included"
+    type: sum
+    drill_fields: [detail*]
+    value_format_name: "usd"
+    sql: ${gross_sales} ;;
+  }
+
 
   dimension: shipping_required {
     view_label: "Order Validity Check"

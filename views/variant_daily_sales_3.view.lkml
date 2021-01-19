@@ -149,6 +149,7 @@ view: variant_daily_sales_3 {
     allowed_value: { value: "Week" }
     allowed_value: { value: "Month" }
     allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
     default_value: "Week"
   }
   dimension: dynamic_timeframe {
@@ -158,6 +159,7 @@ view: variant_daily_sales_3 {
       WHEN {% parameter timeframe_picker %} = 'Quarter' THEN _445_quarter_text
       WHEN {% parameter timeframe_picker %} = 'Week' THEN _445_week_text
       WHEN {% parameter timeframe_picker %} = 'Month' THEN _445_month_text
+      WHEN {% parameter timeframe_picker %} = 'Year' THEN CAST(_445_year AS STRING)
     END ;;
   }
   dimension: dynamic_end_of_period_inventory_quantity {
@@ -167,6 +169,7 @@ view: variant_daily_sales_3 {
       WHEN {% parameter timeframe_picker %} = 'Quarter' THEN ${end_of_quarter_stock}
       WHEN {% parameter timeframe_picker %} = 'Week' THEN ${end_of_week_stock}
       WHEN {% parameter timeframe_picker %} = 'Month' THEN ${end_of_month_stock}
+      WHEN {% parameter timeframe_picker %} = 'Year' THEN ${end_of_year_stock}
     END ;;
   }
   dimension: dynamic_week_count {
@@ -178,6 +181,7 @@ view: variant_daily_sales_3 {
       WHEN {% parameter timeframe_picker %} = 'Month' AND MOD(${_445_month},3)=0 THEN 5
       WHEN {% parameter timeframe_picker %} = 'Month' THEN 4
       WHEN {% parameter timeframe_picker %} = 'Week' THEN 1
+      WHEN {% parameter timeframe_picker %} = 'Year' THEN 52
     END ;;
   }
   measure: dynamic_week_count_final {

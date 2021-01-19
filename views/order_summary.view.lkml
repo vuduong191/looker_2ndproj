@@ -6,6 +6,7 @@ view: order_summary {
   derived_table: {
     explore_source: order {
       column: sum_of_net_sales {}
+      column: sum_of_gross_sales {}
       column: 445_year {field: calendar_convert_445._445_year }
       column: 445_quarter {field: calendar_convert_445._445_quarter }
       column: 445_month {field: calendar_convert_445._445_month }
@@ -42,6 +43,12 @@ view: order_summary {
     value_format: "$#,##0.00"
     type: sum
     sql: ${TABLE}.sum_of_net_sales ;;
+  }
+  measure: sum_of_gross_sales {
+    description: "tax excluded, shipping fee included, before discount"
+    value_format: "$#,##0.00"
+    type: sum
+    sql: ${TABLE}.sum_of_gross_sales ;;
   }
   measure: sum_of_subtotal_price {
     description: "Sum(Line item prices) - Discount"
