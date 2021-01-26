@@ -9,6 +9,7 @@ view: inventory_snapshot_au_2 {
       column: pk {}
       column: sku {}
       column: vu_date_string {}
+      column: count_of_inactive_item_days {}
       column: day {field:inventory_snapshot_au.day_date}
       column: _445_week { field: calendar_convert_445._445_week }
       column: _445_month { field: calendar_convert_445._445_month }
@@ -91,4 +92,8 @@ view: inventory_snapshot_au_2 {
     type: number
   }
   dimension: date_string {}
+  measure: count_of_inactive_item_days {
+    type: sum
+    sql: ${TABLE}.count_of_inactive_item_days ;;
+  }
 }
