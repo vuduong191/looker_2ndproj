@@ -129,4 +129,16 @@ view: ga_channel_performance {
       value: "non_paid"
     }
   }
+  measure: revenue {
+    type: sum
+    sql: ${TABLE}.transaction_revenue ;;
+  }
+  measure: transaction {
+    type: sum
+    sql: ${TABLE}.transactions ;;
+  }
+  measure: sum_of_sessions {
+    type: sum
+    sql: ${TABLE}.sessions ;;
+  }
 }

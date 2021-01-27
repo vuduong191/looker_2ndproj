@@ -269,3 +269,10 @@ explore: base_445_calendar {
 }
 explore: ga_channel_performance {}
 explore: ga_order_count_paid_non_paid_daily {}
+explore: ga_channel_main_metrics{
+  join: calendar_convert_445 {
+    relationship: many_to_one
+    sql_on: ${ga_channel_main_metrics.vu_date_string} = ${calendar_convert_445.date_string} ;;
+    # fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
+  }
+}
