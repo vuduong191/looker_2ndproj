@@ -35,7 +35,7 @@ view: rakuten_report_pub_daily {
   measure: orders {
     value_format: "0"
     type: sum
-    sql: ${TABLE}.clicks_draft ;;
+    sql: ${TABLE}.orders_draft ;;
   }
   measure: sales {
     value_format: "$#,##0.00"
