@@ -42,7 +42,7 @@ explore: order_line {
     type: left_outer
     relationship: many_to_one
     view_label: "Order"
-    fields: [order.created_autz_raw,order.created_autz_date,order.created_autz_week,order.created_autz_month, order.created_date, order.created_raw, order.created_week, order.is_cancelled, order.source_name,id, name, min_order_id, order.online_order, order.dynamic_timeframe, order.timeframe_picker, order.date_simple, order.vu_date_string]
+    # fields: [order.created_autz_raw,order.created_autz_date,order.created_autz_week,order.created_autz_month, order.created_date, order.created_raw, order.created_week, order.is_cancelled, order.source_name,id, name, min_order_id, order.online_order, order.dynamic_timeframe, order.timeframe_picker, order.date_simple, order.vu_date_string]
     sql_on: ${order.id}=${order_line.order_id} ;;
   }
   join: calendar_convert_445 {

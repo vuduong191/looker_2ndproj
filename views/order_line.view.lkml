@@ -278,7 +278,11 @@ view: order_line {
     value_format_name: decimal_2
     sql: ${total_discount} ;;
   }
-
+  measure: average_of_price {
+    type: average
+    value_format_name: decimal_2
+    sql: ${price} ;;
+  }
   # measure: markdown_total {
   #   type: number
   #   description: "Original price - Price before tax"
