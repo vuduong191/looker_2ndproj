@@ -8,6 +8,9 @@ view: rakuten_report_daily {
       column: vu_date_string {}
       column: total_commission_draft {}
       column: market {}
+      column: clicks_draft {}
+      column: sales_draft {}
+      column: orders_draft {}
       filters: {
         field: rakuten_report.market
         value: "au"
@@ -23,5 +26,20 @@ view: rakuten_report_daily {
     value_format: "$#,##0.00"
     type: sum
     sql: ${TABLE}.total_commission_draft ;;
+  }
+  measure: clicks {
+    value_format: "0"
+    type: sum
+    sql: ${TABLE}.clicks_draft ;;
+  }
+  measure: orders {
+    value_format: "0"
+    type: sum
+    sql: ${TABLE}.orders_draft ;;
+  }
+  measure: sales {
+    value_format: "$#,##0.00"
+    type: sum
+    sql: ${TABLE}.sales_draft ;;
   }
 }

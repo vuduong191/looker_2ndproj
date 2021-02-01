@@ -228,7 +228,13 @@ explore: facebook_ad_daily {}
 explore: bing_ad {}
 explore: bing_ad_daily {}
 explore: rakuten_report {}
-explore: rakuten_report_daily {}
+explore: rakuten_report_daily {
+  join: calendar_convert_445 {
+    relationship: many_to_one
+    sql_on: ${rakuten_report_daily.vu_date_string} = ${calendar_convert_445.date_string} ;;
+    # fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
+  }
+}
 explore: base_445_calendar {
   join: google_ad_daily {
     relationship: many_to_one
