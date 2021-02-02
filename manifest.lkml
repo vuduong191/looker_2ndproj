@@ -11,3 +11,11 @@ constant: timezone_string {
 constant: bing_acc_id {
   value: "2739205"
 }
+constant: facebook_acc_id {
+  value: "346057911"
+}
+
+constant: pinterest_acc_id {
+  value: "549761675459"
+}
+# us pinterest 549755814818

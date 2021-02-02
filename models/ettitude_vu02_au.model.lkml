@@ -289,3 +289,30 @@ explore: rakuten_report_pub_daily{
     # fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
   }
 }
+explore: facebook_main_metrics {}
+explore: facebook_action {}
+explore: facebook_action_value {}
+explore: facebook_main_metrics_daily {
+  join: calendar_convert_445 {
+    relationship: many_to_one
+    sql_on: ${facebook_main_metrics_daily.vu_date_string} = ${calendar_convert_445.date_string} ;;
+    # fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
+  }
+  join: facebook_daily_order_count {
+    relationship: many_to_one
+    sql_on: ${facebook_main_metrics_daily.vu_date_string} = ${facebook_daily_order_count.vu_date_string} ;;
+  }
+  join: facebook_daily_revenue {
+    relationship: many_to_one
+    sql_on: ${facebook_main_metrics_daily.vu_date_string} = ${facebook_daily_revenue.vu_date_string} ;;
+  }
+}
+explore: pinterest_advertiser_report {}
+explore: pinterest_daily_performance {
+  join: calendar_convert_445 {
+    relationship: many_to_one
+    sql_on: ${pinterest_daily_performance.vu_date_string} = ${calendar_convert_445.date_string} ;;
+    # fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
+  }
+}
+explore: facebook_daily_revenue {}
