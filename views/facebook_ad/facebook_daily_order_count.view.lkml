@@ -13,7 +13,7 @@ view: facebook_daily_order_count {
       }
       filters: {
         field: facebook_action.account_id
-        value: "346057911"
+        value: "@{facebook_acc_id}"
       }
     }
   }
