@@ -211,6 +211,23 @@ view: bing_ad {
     value_format: "$#,##0.00"
     sql: ${spend} ;;
   }
+  measure: total_of_clicks {
+    type: sum
+    sql: ${clicks} ;;
+  }
+  measure: total_of_impressions {
+    type: sum
+    sql: ${impressions} ;;
+  }
+  measure: total_of_conversions {
+    type: sum
+    sql: ${conversions} ;;
+  }
+  measure: total_of_revenue {
+    type: sum
+    value_format: "$#,##0.00"
+    sql: ${revenue} ;;
+  }
   dimension: vu_date_string {
     description: "Date in yyyymmdd format"
     type: string

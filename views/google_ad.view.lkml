@@ -141,6 +141,22 @@ view: google_ad {
     value_format: "$#,##0.00"
     sql: ${cost} ;;
   }
+  measure: total_of_impressions {
+    type: sum
+    sql: ${TABLE}.impressions ;;
+  }
+  measure: total_of_conversions {
+    type: sum
+    sql: ${TABLE}.conversions ;;
+  }
+  measure: total_of_conversion_value {
+    type: sum
+    sql: ${TABLE}.conversion_value ;;
+  }
+  measure: total_of_clicks {
+    type: sum
+    sql: ${TABLE}.clicks ;;
+  }
   dimension: vu_date_string {
     description: "Date in yyyymmdd format"
     type: string
