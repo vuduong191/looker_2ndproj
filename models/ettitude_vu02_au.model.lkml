@@ -341,3 +341,4 @@ explore: klaviyo_campaign_main_metrics {
     sql_on: ${klaviyo_campaign_main_metrics.campaign_id} = ${klaviyo_campaign.id} ;;
   }
 }
+# test
