@@ -328,3 +328,16 @@ explore: pinterest_daily_performance {
   }
 }
 explore: facebook_daily_revenue {}
+explore: klaviyo_placed_order {}
+explore: klaviyo_event {}
+explore: klaviyo_campaign {}
+explore: klaviyo_campaign_main_metrics {
+  join: klaviyo_campaign_revenue {
+    relationship: one_to_one
+    sql_on: ${klaviyo_campaign_main_metrics.campaign_id}=${klaviyo_campaign_revenue.campaign} ;;
+  }
+  join: klaviyo_campaign {
+    relationship: many_to_one
+    sql_on: ${klaviyo_campaign_main_metrics.campaign_id} = ${klaviyo_campaign.id} ;;
+  }
+}
