@@ -555,7 +555,23 @@ view: klaviyo_event {
       field: type
       value: "Opened Email"
     }
-}
+  }
+  measure: unsubscribed_count {
+    type: count_distinct
+    sql:  ${person_id} ;;
+    filters: {
+      field: type
+      value: "Unsubscribed"
+    }
+  }
+  measure: bounced_email_count {
+    type: count_distinct
+    sql:  ${person_id} ;;
+    filters: {
+      field: type
+      value: "Bounced Email"
+    }
+  }
 
   # ----- Sets of fields for drilling ------
   set: detail {

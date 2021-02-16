@@ -9,6 +9,8 @@ view: klaviyo_campaign_main_metrics {
       column: clicked_email_count {}
       column: opened_email_count {}
       column: received_email_count {}
+      column: unsubscribed_count {}
+      column: bounced_email_count {}
       filters: {
         field: klaviyo_event.campaign_id
         value: "-NULL"
@@ -27,6 +29,12 @@ view: klaviyo_campaign_main_metrics {
   dimension: received_email_count {
     type: number
   }
+  dimension: bounced_email_count {
+    type: number
+  }
+  dimension: unsubscribed_count {
+    type: number
+  }
   measure: total_clicks {
     type: sum
     sql: ${clicked_email_count} ;;
@@ -38,5 +46,13 @@ view: klaviyo_campaign_main_metrics {
   measure: total_receives {
     type: sum
     sql: ${received_email_count} ;;
+  }
+  measure: total_bounces {
+    type: sum
+    sql: ${bounced_email_count} ;;
+  }
+  measure: total_unsubs {
+    type: sum
+    sql: ${unsubscribed_count} ;;
   }
 }
