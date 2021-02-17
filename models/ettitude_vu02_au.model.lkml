@@ -341,4 +341,11 @@ explore: klaviyo_campaign_main_metrics {
     sql_on: ${klaviyo_campaign_main_metrics.campaign_id} = ${klaviyo_campaign.id} ;;
   }
 }
+explore: google_ads_campaign {
+  join: calendar_convert_445 {
+    relationship: many_to_one
+    sql_on: ${google_ads_campaign.vu_date_string} = ${calendar_convert_445.date_string} ;;
+    # fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
+  }
+}
 # test
