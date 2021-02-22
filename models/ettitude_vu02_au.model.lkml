@@ -348,4 +348,23 @@ explore: google_ads_campaign {
     # fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
   }
 }
+explore: facebook_main_metrics_13a {}
+explore: facebook_13_actions {}
+explore: facebook_13_action_values {}
+explore: facebook_main_metrics_13a_daily {
+  join: calendar_convert_445 {
+    relationship: many_to_one
+    sql_on: ${facebook_main_metrics_13a_daily.vu_date_string} = ${calendar_convert_445.date_string} ;;
+    # fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
+  }
+  join: facebook_daily_order_count_13a {
+    relationship: many_to_one
+    sql_on: ${facebook_main_metrics_13a_daily.pk} = ${facebook_daily_order_count_13a.pk} ;;
+  }
+  join: facebook_daily_revenue_13a {
+    relationship: many_to_one
+    sql_on: ${facebook_main_metrics_13a_daily.pk} = ${facebook_daily_revenue_13a.pk} ;;
+  }
+}
 # test
+
