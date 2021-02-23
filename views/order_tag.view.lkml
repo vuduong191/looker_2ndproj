@@ -30,10 +30,17 @@ view: order_tag {
   dimension: marketing_tag_integer {
     type: number
     hidden: yes
-    sql: CASE WHEN value in
-            ('Samples','B2B Sample','Media Sample','Partnership','Giveaway','Influence','Investor')
+    sql: CASE WHEN lower(value) in
+            ('samples','b2b Sample','media sample','photoshoot sample','partnership','giveaway','influence','investor')
             THEN 1 ELSE 0 END;;
   }
+  dimension: excludefromreport {
+    type: number
+    # hidden: yes
+    sql: if ( lower(value) LIKE 'or %'
+      OR value = 'EXCLUDEFROMREPORT', 1, 0);;
+  }
+
   dimension: b2b_tag_integer {
     type: number
     sql: if ( lower(value) LIKE '%b2b%'
@@ -53,6 +60,11 @@ view: order_tag {
     type: sum
     hidden: yes
     sql: ${marketing_tag_integer} ;;
+  }
+  measure: sum_excludefromreport_tag_integer {
+    type: sum
+    hidden: yes
+    sql: ${excludefromreport} ;;
   }
   measure: sum_b2b_tag_integer {
     type: sum

@@ -10,13 +10,13 @@ datagroup: daily_datagroup {
 }
 
 explore: order {
-  join: order_tag {
-    # view_label: "Order Validity Check"
-    type: left_outer
-    relationship: one_to_many
-    sql_on: ${order.id} = ${order_tag.pk2_order_id} ;;
-    fields: [value, marketing_tag_integer, sum_marketing_tag_integer, sum_b2b_tag_integer]
-  }
+  # join: order_tag {
+  #   # view_label: "Order Validity Check"
+  #   type: left_outer
+  #   relationship: one_to_many
+  #   sql_on: ${order.id} = ${order_tag.pk2_order_id} ;;
+  #   fields: [value, marketing_tag_integer, sum_marketing_tag_integer, sum_b2b_tag_integer]
+  # }
   join: order_is_marketing {
     view_label: "Order Validity Check"
     type: left_outer
@@ -28,6 +28,12 @@ explore: order {
     type: left_outer
     relationship: one_to_one
     sql_on: ${order.id} = ${order_is_b2b.id} ;;
+  }
+  join: order_is_excluded_from_report {
+    view_label: "Order Validity Check"
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${order.id} = ${order_is_excluded_from_report.id} ;;
   }
   join: calendar_convert_445 {
     relationship: many_to_one
@@ -50,27 +56,33 @@ explore: order_line {
     sql_on: ${order.vu_date_string} = ${calendar_convert_445.date_string} ;;
     # fields: [calendar_convert_445._445_month, calendar_convert_445._445_quarter, calendar_convert_445._445_year, calendar_convert_445._445_week, calendar_convert_445.date_number_445_full, calendar_convert_445.current_date_number_445_start, calendar_convert_445.current_date_number_445_end]
   }
-  join: order_tag {
-    view_label: "Order Line"
-    type: left_outer
-    relationship: one_to_many
-    sql_on: ${order_line.order_id} = ${order_tag.pk2_order_id} ;;
-    fields: [value, marketing_tag_integer, sum_marketing_tag_integer, sum_b2b_tag_integer]
-  }
+  # join: order_tag {
+  #   view_label: "Order Line"
+  #   type: left_outer
+  #   relationship: one_to_many
+  #   sql_on: ${order_line.order_id} = ${order_tag.pk2_order_id} ;;
+  #   fields: [value, marketing_tag_integer, sum_marketing_tag_integer, sum_b2b_tag_integer]
+  # }
   join: order_is_marketing {
-    view_label: "Order Line"
+    # view_label: "Order Line"
     type: left_outer
     relationship: one_to_one
     sql_on: ${order_line.id} = ${order_is_marketing.id} ;;
   }
   join: order_is_b2b {
-    view_label: "Order Line"
+    # view_label: "Order Line"
     type: left_outer
     relationship: one_to_one
     sql_on: ${order_line.id} = ${order_is_b2b.id} ;;
   }
+  join: order_is_excluded_from_report {
+    # view_label: "Order Line"
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${order_line.id} = ${order_is_excluded_from_report.id} ;;
+  }
   join: product {
-    view_label: "Order Line"
+    # view_label: "Order Line"
     relationship: many_to_one
     sql_on: ${order_line.product_id}=${product.id} ;;
   }
@@ -367,4 +379,3 @@ explore: facebook_main_metrics_13a_daily {
   }
 }
 # test
-

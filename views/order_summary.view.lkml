@@ -36,6 +36,10 @@ view: order_summary {
         field: order_is_b2b.is_b2b
         value: "No"
       }
+      filters: {
+        field: order_is_excluded_from_report.is_excludefromreport
+        value: "No"
+      }
     }
   }
   measure: sum_of_net_sales {
