@@ -378,4 +378,5 @@ explore: facebook_main_metrics_13a_daily {
     sql_on: ${facebook_main_metrics_13a_daily.pk} = ${facebook_daily_revenue_13a.pk} ;;
   }
 }
+explore: ga_campaign_performance_au {}
 # test
