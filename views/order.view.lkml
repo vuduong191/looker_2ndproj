@@ -218,7 +218,7 @@ view: order {
       year
     ]
     convert_tz: no
-    sql: DATE(${TABLE}.created_at, '@{timezone_string}') ;;
+    sql: TIMESTAMP(FORMAT_DATETIME("%F", DATE(${TABLE}.created_at, '@{timezone_string}'))) ;;
   }
   parameter: timeframe_picker {
     label: "Date Granularity"

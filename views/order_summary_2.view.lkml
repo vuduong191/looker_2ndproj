@@ -12,6 +12,7 @@ view: order_summary_2 {
       # column: current_date_number_445_end {}
       column: date_number_445_full {}
       column: date_simple {}
+      column: created_autz_raw {}
       column: count_of_order {}
       column: sum_of_net_sales {}
       column: sum_of_subtotal_price {}
@@ -82,7 +83,12 @@ view: order_summary_2 {
     type: date
     convert_tz: no
   }
-
+  dimension_group: created {
+    type: time
+    timeframes: [date, week, month]
+    convert_tz: no
+    sql: ${TABLE}.created_autz_raw ;;
+  }
   measure: sum_of_net_sales {
     description: "tax excluded, shipping fee included"
     value_format: "$#,##0.00"

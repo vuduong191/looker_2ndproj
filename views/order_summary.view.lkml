@@ -20,6 +20,7 @@ view: order_summary {
       column: count {}
       column: vu_date_string {}
       column: date_simple {}
+      column: created_autz_raw {}
       filters: {
         field: order.is_cancelled
         value: "No"
@@ -95,7 +96,7 @@ view: order_summary {
     type: date
     convert_tz: no
   }
-
+  dimension: created_autz_raw {}
   filter: current_date_range {
     type: date
     view_label: "_PoP"
