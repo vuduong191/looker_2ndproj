@@ -1,6 +1,6 @@
 connection: "klaviyo"
 
-# include all the views
+# include all the viewsa
 include: "/views/**/*.view"
 include: "/dashboards/*.dashboard"
 week_start_day: sunday
