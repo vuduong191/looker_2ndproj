@@ -9,6 +9,7 @@ view: bundle_sales {
       column: sum_of_quantity {}
       column: order_count {}
       column: count_of_line_items {}
+      column: created_autz { field: order.created_autz_raw }
       # filters: {
       #   field: order_line.property_complete_bundle
       #   value: "1"
@@ -20,7 +21,7 @@ view: bundle_sales {
     type: time
     timeframes: [raw, date, week, month, year]
     datatype: timestamp
-    sql: ${TABLE}.created_raw;;
+    sql: ${TABLE}.created_autz;;
   }
   parameter: timeframe_picker {
     label: "Date Granularity"

@@ -141,6 +141,68 @@
       bundle_sales.bundle_total_pre_tax_price]
     width: 12
 
+  - name: order_by_bundle_au
+    title: Order Contribution by Bundles (vs Total Orders)
+    model: ettitude_vu02_au
+    explore: bundle_sales
+    type: looker_bar
+    fields: [bundle_sales.dynamic_timeframe, bundle_sales.bundle_order_count,
+      bundle_sales.property_discount_name]
+    pivots: [bundle_sales.property_discount_name]
+    listen:
+      date_aggregation: bundle_sales.timeframe_picker
+      date: bundle_sales.createdgroup_date
+    filters:
+      bundle_sales.property_discount_name: "-NULL"
+    sorts: [bundle_sales.property_discount_name 0, bundle_sales.dynamic_timeframe]
+    limit: 500
+    query_timezone: Australia/Melbourne
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: percent
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: '', orientation: left, series: [{axisId: bundle_sales.bundle_total_pre_tax_price,
+    id: bundle_sales.bundle_total_pre_tax_price, name: Bundle Net Sales, __FILE: ettitude_vu02_au/dashboards/bundle_sales_au.dashboard.lookml,
+    __LINE_NUM: 188}], showLabels: true, showValues: true, unpinAxis: false,
+    tickDensity: default, tickDensityCustom: 5, type: linear, __FILE: ettitude_vu02_au/dashboards/bundle_sales_au.dashboard.lookml,
+    __LINE_NUM: 188}, {label: !!null '', orientation: right, series: [{axisId: bundle_sales.bundle_order_count,
+      id: bundle_sales.bundle_order_count, name: Bundle Order Count, __FILE: ettitude_vu02_au/dashboards/bundle_sales_au.dashboard.lookml,
+      __LINE_NUM: 191}], showLabels: true, showValues: true, unpinAxis: false,
+    tickDensity: default, tickDensityCustom: 5, type: linear, __FILE: ettitude_vu02_au/dashboards/bundle_sales_au.dashboard.lookml,
+    __LINE_NUM: 191}]
+    hidden_series: [bundle_sales.property_discount_name___null - bundle_sales.bundle_total_pre_tax_price]
+    series_types: {}
+    reference_lines: []
+    trend_lines: []
+    show_null_points: true
+    interpolation: linear
+    defaults_version: 1
+    hidden_fields:
+    width: 12
+    height: 8
 
   - name: net_sales_by_bundle_au
     title: Net Sales Contribution by Bundles (vs Total Net Sales)
