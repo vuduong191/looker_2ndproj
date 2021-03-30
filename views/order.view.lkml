@@ -445,7 +445,12 @@ view: order {
     type: number
     sql: ${TABLE}.subtotal_price ;;
   }
-
+  dimension: total_price_tier {
+    type: tier
+    style: integer
+    tiers: [0,100,130,150,170,190,210,230,250,270, 290,310]
+    sql: ${total_price} ;;
+  }
   dimension: taxes_included {
     type: yesno
     sql: ${TABLE}.taxes_included ;;
