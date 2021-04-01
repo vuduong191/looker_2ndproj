@@ -6,6 +6,7 @@ view: rakuten_report_daily {
   derived_table: {
     explore_source: rakuten_report {
       column: vu_date_string {}
+      column: transaction_raw {}
       column: total_commission_draft {}
       column: market {}
       column: clicks_draft {}
@@ -16,6 +17,20 @@ view: rakuten_report_daily {
         value: "au"
       }
     }
+  }
+  dimension_group: transaction {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}.transaction_raw ;;
   }
   dimension: vu_date_string {
     primary_key: yes
