@@ -379,5 +379,5 @@ explore: facebook_main_metrics_13a_daily {
   }
 }
 explore: ga_campaign_performance_au {}
-# test
+# tests
 explore: gift_card {}
