@@ -1,5 +1,5 @@
-view: ga_ga_page_performance_au {
-  sql_table_name: `aerobic-datum-283623.ga_au.ga_ga_page_performance_au`
+view: ga_page_performance_au {
+  sql_table_name: `aerobic-datum-283623.ga_au.ga_page_performance_au`
     ;;
 # wrong table name, will update later
   dimension: _fivetran_id {

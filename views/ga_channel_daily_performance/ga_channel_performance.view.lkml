@@ -71,6 +71,7 @@ view: ga_channel_performance {
 
   dimension: profile {
     type: string
+    hidden: yes
     sql: ${TABLE}.profile ;;
   }
 
