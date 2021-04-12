@@ -438,6 +438,7 @@ view: order {
     sql: ${TABLE}.source_name ;;
   }
   dimension: online_order {
+    view_label: "Order Validity Check"
     type: yesno
     sql: ${TABLE}.source_name="web" OR ${TABLE}.source_name="580111";;
   }
