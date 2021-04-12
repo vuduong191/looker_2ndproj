@@ -174,8 +174,8 @@ explore: order_tag {}
 explore: order_is_b2b {}
 explore: woh {}
 explore: bundle_sales {}
-explore: page_performance_au {}
-explore: page_performance_channel {}
+explore: ga_page_performance_au {}
+explore: ga_page_performance_channel {}
 explore: impact_page {
   join: all_page {
     relationship: many_to_one

@@ -1,5 +1,5 @@
 view: ga_campaign_performance_au {
-  sql_table_name: `aerobic-datum-283623.google_analytics_au.ga_campaign_performance_au`
+  sql_table_name: `aerobic-datum-283623.ga_au.ga_campaign_performance_au`
     ;;
 
 

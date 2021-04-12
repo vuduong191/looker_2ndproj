@@ -1,5 +1,5 @@
-view: page_performance_channel {
-  sql_table_name: `aerobic-datum-283623.google_analytics_test_au.page_performance_channel`
+view: ga_ga_page_performance_channel {
+  sql_table_name: `aerobic-datum-283623.ga_au.ga_ga_page_performance_channel_au`
     ;;
 
 

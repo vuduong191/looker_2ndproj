@@ -1208,19 +1208,19 @@
     - name: add_a_unique_name_1608342520
       title: Traffic Acquisition Channel
       model: ettitude_vu02_au
-      explore: page_performance_channel
+      explore: ga_page_performance_channel
       type: looker_bar
-      fields: [page_performance_channel.date_pk, page_performance_channel.total_bounces,
-        page_performance_channel.total_entrances, page_performance_channel.total_exits,
-        page_performance_channel.total_generated_revenue, page_performance_channel.total_pageviews,
-        page_performance_channel.total_time_on_page, page_performance_channel.total_unique_pageviews,
-        page_performance_channel.channel_grouping]
-      pivots: [page_performance_channel.channel_grouping]
-      fill_fields: [page_performance_channel.date_pk]
+      fields: [ga_page_performance_channel.date_pk, ga_page_performance_channel.total_bounces,
+        ga_page_performance_channel.total_entrances, ga_page_performance_channel.total_exits,
+        ga_page_performance_channel.total_generated_revenue, ga_page_performance_channel.total_pageviews,
+        ga_page_performance_channel.total_time_on_page, ga_page_performance_channel.total_unique_pageviews,
+        ga_page_performance_channel.channel_grouping]
+      pivots: [ga_page_performance_channel.channel_grouping]
+      fill_fields: [ga_page_performance_channel.date_pk]
       filters:
-        page_performance_channel.page_path: "%impact%"
-        page_performance_channel.date_pk: 2020/12/14 to 2020/12/22
-      sorts: [page_performance_channel.channel_grouping 0, page_performance_channel.total_entrances
+        ga_page_performance_channel.page_path: "%impact%"
+        ga_page_performance_channel.date_pk: 2020/12/14 to 2020/12/22
+      sorts: [ga_page_performance_channel.channel_grouping 0, ga_page_performance_channel.total_entrances
           desc 0]
       limit: 500
       query_timezone: America/Los_Angeles
@@ -1266,9 +1266,9 @@
       conditional_formatting_include_totals: false
       conditional_formatting_include_nulls: false
       defaults_version: 1
-      hidden_fields: [page_performance_channel.total_exits, page_performance_channel.total_generated_revenue,
-        page_performance_channel.total_pageviews, page_performance_channel.total_time_on_page,
-        page_performance_channel.total_unique_pageviews, page_performance_channel.total_bounces]
+      hidden_fields: [ga_page_performance_channel.total_exits, ga_page_performance_channel.total_generated_revenue,
+        ga_page_performance_channel.total_pageviews, ga_page_performance_channel.total_time_on_page,
+        ga_page_performance_channel.total_unique_pageviews, ga_page_performance_channel.total_bounces]
       row: 36
       col: 0
       height: 9

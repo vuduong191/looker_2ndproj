@@ -1,5 +1,5 @@
 view: ga_main_kpi_by_device_date_au {
-  sql_table_name: `aerobic-datum-283623.google_analytics_au.ga_main_kpi_by_device_date_au`
+  sql_table_name: `aerobic-datum-283623.ga_au.ga_main_kpi_by_device_date_au`
     ;;
   dimension: bounces {
     hidden: yes

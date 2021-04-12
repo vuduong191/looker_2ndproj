@@ -1,6 +1,6 @@
 view: impact_page {
   derived_table: {
-    explore_source: page_performance_au {
+    explore_source: ga_page_performance_au {
       column: device_category {}
       column: total_entrances {}
       column: total_exit {}
@@ -10,7 +10,7 @@ view: impact_page {
       column: total_unique_pageviews {}
       column: date_pk {}
       filters: {
-        field: page_performance_au.page_path
+        field: ga_page_performance_au.page_path
         value: "%impact%"
       }
     }
